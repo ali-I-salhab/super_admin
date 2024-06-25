@@ -1,6 +1,25 @@
 class AppRoutes {
   static const String homepage = "/homepage";
+  static const String departmentcontactdetials = "/departmentcontactdetials";
+
+  static const String addhotelaccount = "/addhotelaccount";
+  static const String AvailabilityAndRateProvider =
+      "/AvailabilityAndRateProvider";
+  static const String MinimumCommissions = "/MinimumCommissions";
+  static const String payment = "/payment";
+  static const String ContractAttachment = "/ContractAttachment";
+  static const String AccountApproval = "/AccountApproval";
+  static const String Addreservation = "/Addreservation";
+  static const String AddCustomerDetails = "/AddCustomerDetails";
+  static const String AddreservationBedOptions = "/AddreservationBedOptions";
+  static const String AddReservatonGuestoptions = "/AddReservatonGuestoptions";
+  static const String RequestedReservation = "/RequestedReservation";
+  static const String WaitingReservation = "/WaitingReservation";
+  static const String AddReservationRoomDetails = "/AddReservationRoomDetails";
+  static const String AddReservationRooms = "/AddReservationRooms";
+
   static const String setting = "/setting";
+  static const String addaccount = "/addaccount";
 
   static const String notifications = "/notifications";
   static const String login = "/login";
@@ -32,7 +51,7 @@ class AppRoutes {
   static const String details = '/details';
   static const String photos = '/photos';
   static const String groups = '/groups';
-  static const String payment = '/payment';
+  // static const String payment = '/payment';
   static const String rooms = '/rooms';
   static const String availability = '/availability';
   static const String rates = '/rates';

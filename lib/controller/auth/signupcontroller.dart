@@ -24,6 +24,8 @@ class SignupcontrollerImp extends Signupcontroller {
   // GlobalKey<FormState> formstatesignup = GlobalKey<FormState>();
   late TextEditingController email;
   late TextEditingController loginemail;
+  int selectedindex = 0;
+  int switcherIndex2 = 0;
 
   late TextEditingController password;
   late TextEditingController phone;

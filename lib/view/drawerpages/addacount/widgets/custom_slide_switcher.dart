@@ -1,0 +1,121 @@
+import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
+import 'package:super_admin/core/constants/colors.dart';
+
+class SlideSwitcher extends StatefulWidget {
+  @override
+  _ToggleButtonState createState() => _ToggleButtonState();
+}
+
+double width = 80.w;
+double height = 40.sp;
+double loginAlign = -1;
+double signInAlign = 1;
+const Color selectedColor = Colors.white;
+const Color normalColor = Colors.black54;
+
+class _ToggleButtonState extends State<SlideSwitcher> {
+  double? xAlign = loginAlign;
+  Color? loginColor;
+  Color? signInColor;
+
+  @override
+  void initState() {
+    xAlign = loginAlign;
+    loginColor = selectedColor;
+    signInColor = normalColor;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return UnconstrainedBox(
+      child: Container(
+          width: 80.w,
+          height: 50.sp,
+          margin: EdgeInsets.only(top: 2.sp),
+          padding: EdgeInsets.all(10.sp),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black38,
+                  blurRadius: 2,
+                  spreadRadius: 2,
+                  offset: Offset(0, 1))
+            ],
+            borderRadius: BorderRadius.all(
+              Radius.circular(50.0),
+            ),
+          ),
+          child: Stack(
+            children: [
+              AnimatedAlign(
+                alignment: Alignment(xAlign!, 0),
+                duration: Duration(milliseconds: 300),
+                child: Container(
+                  width: width * 0.5,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color: AppColors.main,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(50.0),
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    xAlign = loginAlign;
+                    loginColor = selectedColor;
+
+                    signInColor = normalColor;
+                  });
+                },
+                child: Align(
+                  alignment: Alignment(-1, 0),
+                  child: Container(
+                    width: width * 0.5,
+                    color: Colors.transparent,
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Manually',
+                      style: TextStyle(
+                        color: loginColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    xAlign = signInAlign;
+                    signInColor = selectedColor;
+
+                    loginColor = normalColor;
+                  });
+                },
+                child: Align(
+                  alignment: Alignment(1, 0),
+                  child: Container(
+                    width: width * 0.5,
+                    color: Colors.transparent,
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Requested',
+                      style: TextStyle(
+                        color: signInColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )),
+    );
+  }
+}

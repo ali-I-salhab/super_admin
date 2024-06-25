@@ -41,7 +41,7 @@ class Homepage extends StatelessWidget {
             );
           }),
           drawer: Drawer(),
-          appBar: customappbar(),
+          // appBar: customappbar(),
           body: GetBuilder<HomepageController>(
             builder: (controller) {
               return controller.screens[controller.current_index];

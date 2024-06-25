@@ -5,6 +5,7 @@ import 'package:super_admin/core/constants/route.dart';
 import '../services/services.dart';
 
 class MyMiddleware extends GetMiddleware {
+  // we can pass this middle ware to a route
   @override
   //the most important now
   int? get priority => 1;

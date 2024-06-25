@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:super_admin/core/class/handlingdataview.dart';
 import 'package:super_admin/core/constants/colors.dart';
 import 'package:super_admin/core/functions/alertexitapp.dart';
+import 'package:super_admin/view/auth/widgets/customSwitchslider.dart';
 import 'package:super_admin/view/widgets/auth/authtextformfield.dart';
 import 'package:super_admin/view/widgets/auth/logo.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -24,10 +25,6 @@ class Signup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<Uint8List> loadFromAsset(String key) async {
-      final ByteData byteData = await rootBundle.load(key);
-      return byteData.buffer.asUint8List();
-    }
     // LogincontrollerImp logincontroller = Get.put(LogincontrollerImp());
 
     SignupcontrollerImp controller = Get.put(SignupcontrollerImp());
@@ -45,20 +42,8 @@ class Signup extends StatelessWidget {
         ),
         body: WillPopScope(
             onWillPop: alertexitpp,
-            child:
-                // GetBuilder<SignupcontrollerImp>(builder: (controller) {
-                // return (controller.statusrequest != null &&
-                //         controller.statusrequest == Statusrequest.loading)
-                //     ? Center(
-                //         child: LottieBuilder.asset(
-                //           ImageAssets.loadinglottie,
-                //           width: 200,
-                //           height: 200,
-                //         ),
-                //       )
-                //     :
-                Container(
-              margin: const EdgeInsets.all(35),
+            child: Container(
+              margin: EdgeInsets.all(10.sp),
               child: ListView(
                 physics: BouncingScrollPhysics(),
                 children: [
@@ -74,68 +59,13 @@ class Signup extends StatelessWidget {
                   SizedBox(
                     height: 1.h,
                   ),
+
                   GetBuilder<SignupcontrollerImp>(builder: (controller) {
-                    return Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: AppColors.blue.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(18)),
-                          width: 80.w,
-                          height: 8.h,
-                        ),
-                        Positioned(
-                          top: 1.h,
-                          left: 3.w,
-                          child: InkWell(
-                            onTap: () {
-                              controller.buttonstatus = "signup";
-                              controller.isloginpahe = false;
-
-                              controller.update();
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: controller.buttonstatus == "signup"
-                                      ? AppColors.blue
-                                      : AppColors.blue.withOpacity(0),
-                                  borderRadius: BorderRadius.circular(18)),
-                              width: 40.w,
-                              height: 6.h,
-                              child: Center(
-                                child: Text("Login"),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 1.h,
-                          right: 4.w,
-                          child: InkWell(
-                            onTap: () {
-                              controller.buttonstatus = "login";
-
-                              controller.isloginpahe = true;
-                              controller.update();
-                              print("login");
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: controller.buttonstatus == "login"
-                                      ? AppColors.blue
-                                      : AppColors.blue.withOpacity(0),
-                                  borderRadius: BorderRadius.circular(18)),
-                              width: 40.w,
-                              height: 6.h,
-                              child: Center(
-                                child: Text("Signup"),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                    return CustomSWitchslider(
+                      controller: controller,
                     );
                   }),
+                  AnimatedSlider(),
                   // const LogoAuth(),
                   // const LogoAuth(),
                   GetBuilder<SignupcontrollerImp>(
@@ -291,82 +221,6 @@ class Signup extends StatelessWidget {
                               ));
                     }),
                   ),
-                  // const SizedBox(
-                  //   height: 30,
-                  // ),
-
-                  // CustomTextFormField(
-                  //   isnumeric: false,
-                  //   valid: (val) {
-                  //     return validate(
-                  //         val.toString(), 3, 100, 'username');
-                  //   },
-                  //   hint: '23'.tr,
-                  //   icon: Icons.person_2_outlined,
-                  //   label: '20'.tr,
-                  //   mycontroller: controller.username,
-                  // ),
-                  // const SizedBox(
-                  //   height: 15,
-                  // ),
-                  // CustomTextFormField(
-                  //   isnumeric: true,
-                  //   valid: (val) {
-                  //     return validate(
-                  //         val.toString(), 5, 100, 'phone');
-                  //   },
-                  //   hint: '22'.tr,
-                  //   icon: Icons.phone_outlined,
-                  //   label: '21'.tr,
-                  //   mycontroller: controller.phone,
-                  // ),
-                  // const SizedBox(
-                  //   height: 15,
-                  // ),
-                  // CustomTextFormField(
-                  //   isnumeric: false,
-                  //   valid: (val) {
-                  //     return validate(
-                  //         val.toString(), 9, 100, 'email');
-                  //   },
-                  //   hint: '29'.tr,
-                  //   icon: Icons.email_outlined,
-                  //   label: '18'.tr,
-                  //   mycontroller: controller.email,
-                  // ),
-                  // const SizedBox(
-                  //   height: 15,
-                  // ),
-                  // CustomTextFormField(
-                  //   isnumeric: false,
-                  //   valid: (val) {
-                  //     return validate(
-                  //         val.toString(), 7, 100, 'password');
-                  //   },
-                  //   hint: '13'.tr,
-                  //   icon: Icons.lock_outline,
-                  //   label: '19'.tr,
-                  //   mycontroller: controller.password,
-                  // ),
-                  // const SizedBox(
-                  //   height: 10,
-                  // ),
-                  // CustomAuthButton(
-                  //   text: '17'.tr,
-                  //   onPressed: () {
-                  //     controller.signup();
-                  //   },
-                  // ),
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
-                  // TextSignup(
-                  //   ontap: () {
-                  //     controller.gotosignin();
-                  //   },
-                  //   firsttext: '16'.tr,
-                  //   Secondtext: '15'.tr,
-                  // )
                 ],
               ),
             )));

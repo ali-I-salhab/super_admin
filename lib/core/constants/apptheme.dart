@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:super_admin/core/constants/colors.dart';
 
 ThemeData appthemEN = ThemeData(
-    appBarTheme: AppBarTheme(color: AppColors.white),
+    appBarTheme: AppBarTheme(color: AppColors.main),
     scaffoldBackgroundColor: AppColors.scafold,
     // floatingActionButtonTheme:
     //     FloatingActionButtonThemeData(backgroundColor: AppColors.primarycolor),
@@ -20,7 +20,7 @@ ThemeData appthemEN = ThemeData(
             color: AppColors.black)));
 
 ThemeData appthemAR = ThemeData(
-    appBarTheme: AppBarTheme(color: Colors.red),
+    appBarTheme: AppBarTheme(color: AppColors.main),
     textTheme: const TextTheme(
         bodyMedium: TextStyle(
             fontSize: 16,

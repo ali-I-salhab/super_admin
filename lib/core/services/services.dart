@@ -6,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 //any thing needed to start when application started will added to this file
 
 class MyServices extends GetxService {
+  // we can use dependece injection Get.put ....
+  // because we extends Getxservices
   late SharedPreferences shared;
   Future<MyServices> init() async {
     // await Firebase.initializeApp();
