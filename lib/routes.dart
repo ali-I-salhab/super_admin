@@ -17,10 +17,16 @@ import 'package:super_admin/view/drawerpages/addacount/minimumcommisions.dart';
 import 'package:super_admin/view/drawerpages/addacount/payment.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/addcustomerdetails.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/addreservation.dart';
+import 'package:super_admin/view/drawerpages/manualreservation/bedoptions.dart';
+import 'package:super_admin/view/drawerpages/manualreservation/completedbooking.dart';
+import 'package:super_admin/view/drawerpages/manualreservation/guestoption.dart';
+import 'package:super_admin/view/drawerpages/manualreservation/mainmanualreservation.dart';
+import 'package:super_admin/view/drawerpages/manualreservation/payout.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/requestedreservation.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/roomdetails.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/rooms.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/waitingreservation.dart';
+import 'package:super_admin/view/drawerpages/manualreservation/waitingreservations.dart';
 import 'package:super_admin/view/forgetpassword/verifycodeforgetpassword.dart';
 import 'package:super_admin/view/homepahe.dart';
 import 'package:super_admin/view/onboarding/onboarding.dart';
@@ -109,5 +115,36 @@ List<GetPage<dynamic>>? getPages = [
   GetPage(
     name: AppRoutes.AddReservationRooms,
     page: () => const AddReservationRooms(),
+  ),
+  GetPage(
+    name: AppRoutes.AddreservationBedOptions,
+    page: () => const AddreservationBedOptions(),
+    // AddReservatonGuestoptions
+  ),
+  GetPage(
+    name: AppRoutes.AddReservatonGuestoptions,
+    page: () => const AddReservatonGuestoptions(),
+    // AddReservatonGuestoptions
+  ),
+  GetPage(
+    name: AppRoutes.MainManualReservation,
+    page: () => const MainManualReservation(),
+    // AddReservatonGuestoptions
+  ),
+
+  GetPage(
+    name: AppRoutes.WaitingReservations,
+    page: () => const WaitingReservations(),
+    // AddReservatonGuestoptions
+  ),
+  GetPage(
+    name: AppRoutes.Payout,
+    page: () => const Payout(),
+    // AddReservatonGuestoptions
+  ),
+  GetPage(
+    name: AppRoutes.CompleteBooking,
+    page: () => const CompleteBooking(),
+    // AddReservatonGuestoptions
   ),
 ];

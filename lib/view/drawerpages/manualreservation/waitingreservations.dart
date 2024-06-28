@@ -11,18 +11,16 @@ import 'package:super_admin/view/drawerpages/manualreservation/widgets/customdon
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/customdropbutton.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/custompersoncardoption.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/customroomoptionscard.dart';
-import 'package:super_admin/view/drawerpages/manualreservation/widgets/roombedoptions.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/roomcard.dart';
 
-class AddreservationBedOptions extends StatefulWidget {
-  const AddreservationBedOptions({super.key});
+class WaitingReservations extends StatefulWidget {
+  const WaitingReservations({super.key});
 
   @override
-  State<AddreservationBedOptions> createState() =>
-      _AddReservationRoomDetailsState();
+  State<WaitingReservations> createState() => _AddReservationRoomDetailsState();
 }
 
-class _AddReservationRoomDetailsState extends State<AddreservationBedOptions> {
+class _AddReservationRoomDetailsState extends State<WaitingReservations> {
   @override
   final GlobalKey<SliderDrawerWidgetState> drawerKey = GlobalKey();
 
@@ -47,38 +45,7 @@ class _AddReservationRoomDetailsState extends State<AddreservationBedOptions> {
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Container(
-              margin: EdgeInsets.only(bottom: 20.sp, left: 6.sp, right: 6.sp),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Bed Options",
-                    style: TextStyle(color: AppColors.main, fontSize: 18.sp),
-                  ),
-                  Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        RoomBedOptions(),
-                        RoomBedOptions(),
-                        RoomBedOptions()
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 12.sp),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        DoneButton(ontap: () {
-                          Get.toNamed(AppRoutes.AddReservatonGuestoptions);
-                        }),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
+                margin: EdgeInsets.only(bottom: 20.sp), child: Text('waiting')),
           ),
         ),
       ),

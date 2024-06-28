@@ -77,6 +77,8 @@ dependencies:
   z_time_ago: ^0.1.2  
 
   flutter_slide_drawer: ^1.0.3
+  csc_picker: ^0.2.7
+  animations: ^2.0.8
 
   # cupertino_icons: ^1.0.2
 

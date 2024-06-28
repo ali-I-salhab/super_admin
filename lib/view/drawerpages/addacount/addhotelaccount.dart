@@ -30,7 +30,10 @@ class AddHotelAccount extends StatelessWidget {
               SizedBox(
                 height: 15.sp,
               ),
-              SlideSwitcher(),
+              SlideSwitcher(
+                first: 'Manually',
+                second: 'Requested',
+              ),
               SizedBox(
                 height: 15.sp,
               ),

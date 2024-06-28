@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slide_drawer/flutter_slide_widget.dart';
-import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:super_admin/core/constants/colors.dart';
-import 'package:super_admin/core/constants/route.dart';
 import 'package:super_admin/core/functions/customappbar.dart';
 import 'package:super_admin/view/Homepage/widgets/customdrawer.dart';
 import 'package:super_admin/view/appIcons.dart';
-import 'package:super_admin/view/drawerpages/manualreservation/widgets/customdonebutton.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/customdropbutton.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/custompersoncardoption.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/customroomoptionscard.dart';
-import 'package:super_admin/view/drawerpages/manualreservation/widgets/roombedoptions.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/roomcard.dart';
 
-class AddreservationBedOptions extends StatefulWidget {
-  const AddreservationBedOptions({super.key});
+class ConfirmedReservation extends StatefulWidget {
+  const ConfirmedReservation({super.key});
 
   @override
-  State<AddreservationBedOptions> createState() =>
+  State<ConfirmedReservation> createState() =>
       _AddReservationRoomDetailsState();
 }
 
-class _AddReservationRoomDetailsState extends State<AddreservationBedOptions> {
+class _AddReservationRoomDetailsState extends State<ConfirmedReservation> {
   @override
   final GlobalKey<SliderDrawerWidgetState> drawerKey = GlobalKey();
 
@@ -47,32 +43,19 @@ class _AddReservationRoomDetailsState extends State<AddreservationBedOptions> {
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Container(
-              margin: EdgeInsets.only(bottom: 20.sp, left: 6.sp, right: 6.sp),
+              margin: EdgeInsets.only(bottom: 20.sp),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Bed Options",
-                    style: TextStyle(color: AppColors.main, fontSize: 18.sp),
-                  ),
                   Container(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        RoomBedOptions(),
-                        RoomBedOptions(),
-                        RoomBedOptions()
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 12.sp),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        DoneButton(ontap: () {
-                          Get.toNamed(AppRoutes.AddReservatonGuestoptions);
-                        }),
+                        Container(
+                          child: Row(
+                            children: [
+                              Checkbox(value: false, onChanged: (c) {})
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   )

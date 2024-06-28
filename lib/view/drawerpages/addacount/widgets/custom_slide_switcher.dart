@@ -3,6 +3,10 @@ import 'package:sizer/sizer.dart';
 import 'package:super_admin/core/constants/colors.dart';
 
 class SlideSwitcher extends StatefulWidget {
+  final String first;
+  final String second;
+
+  const SlideSwitcher({super.key, required this.first, required this.second});
   @override
   _ToggleButtonState createState() => _ToggleButtonState();
 }
@@ -80,7 +84,7 @@ class _ToggleButtonState extends State<SlideSwitcher> {
                     color: Colors.transparent,
                     alignment: Alignment.center,
                     child: Text(
-                      'Manually',
+                      widget.first,
                       style: TextStyle(
                         color: loginColor,
                         fontWeight: FontWeight.bold,
@@ -105,7 +109,7 @@ class _ToggleButtonState extends State<SlideSwitcher> {
                     color: Colors.transparent,
                     alignment: Alignment.center,
                     child: Text(
-                      'Requested',
+                      widget.second,
                       style: TextStyle(
                         color: signInColor,
                         fontWeight: FontWeight.bold,

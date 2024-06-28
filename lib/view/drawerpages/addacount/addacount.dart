@@ -96,7 +96,10 @@ class AddAccount extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SlideSwitcher(),
+              SlideSwitcher(
+                first: 'Manual',
+                second: 'Requested',
+              ),
             ],
           ),
           Container(

@@ -68,7 +68,7 @@ class CustomDrawer extends StatelessWidget {
             ),
             MenuBox(
               onTap: () {
-                Get.toNamed(AppRoutes.Addreservation);
+                Get.toNamed(AppRoutes.MainManualReservation);
               },
               name: 'Manual Rservation',
               icon: Icons.check_circle,
