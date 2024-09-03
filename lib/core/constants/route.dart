@@ -60,7 +60,9 @@ class AppRoutes {
   static const String roomdetails = '/roomdetails';
   static const String MainManualReservation = '/MainManualReservation';
   static const String WaitingReservations = '/WaitingReservations';
-  static const String ConfirmedReservation = '/ConfirmedReservation';
   static const String Payout = '/Payout';
   static const String CompleteBooking = '/CompleteBooking';
+
+  static const String ConfirmededReservation = '/ConfirmedReservation';
+  static const String MainAmenties = '/MainAmenties';
 }

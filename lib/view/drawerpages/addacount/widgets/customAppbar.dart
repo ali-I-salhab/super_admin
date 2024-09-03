@@ -9,6 +9,7 @@ import 'package:super_admin/view/appIcons.dart';
 
 PreferredSizeWidget? CustomizableAppBar(
     {void Function()? ontapaction,
+    IconData? icon,
     String? title,
     isactioned = true,
     bool isnotifications = false}) {
@@ -44,30 +45,36 @@ PreferredSizeWidget? CustomizableAppBar(
                       color: AppColors.main,
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(12.sp)),
-                  child: Transform.translate(
-                    offset: Offset(0, -3.5),
-                    child: Center(
-                      child: Transform.rotate(
-                        angle: !isnotifications ? -pi / 2 : 0,
-                        child: !isnotifications
-                            ? Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.white,
-                              )
-                            : Center(
-                                child: Transform.translate(
-                                    offset: Offset(0, 2),
-                                    child: Iconify(AppIcons.notificatons))),
-                      ),
-                    ),
-                  ),
+                  child: icon == null
+                      ? Transform.translate(
+                          offset: Offset(0, -3.5),
+                          child: Center(
+                              child: Transform.rotate(
+                            angle: !isnotifications ? -pi / 2 : 0,
+                            child: !isnotifications
+                                ? Icon(
+                                    icon == null ? Icons.arrow_back_ios : icon,
+                                    color: Colors.white,
+                                  )
+                                : Center(
+                                    child: Transform.translate(
+                                        offset: Offset(0, 2),
+                                        child: Iconify(AppIcons.notificatons))),
+                          )),
+                        )
+                      : Center(
+                          child: Icon(
+                            icon,
+                            color: Colors.white,
+                          ),
+                        ),
                 ),
               ),
             )
           ]
         : [Container()],
     title: Text(
-      title!,
+      title ?? "not tilte",
       style: TextStyle(color: Colors.black),
     ),
   );

@@ -1,8 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+ <uses-permission android:name="android.permission.INTERNET" />
+         <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:label="super_admin"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+          <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyBQ_-vPPyvLZltXJT1X7HnmeWumT4NaSzQ"/>
+               <activity
+    android:name="com.yalantis.ucrop.UCropActivity"
+    android:screenOrientation="portrait"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -23,6 +34,32 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+<meta-data 
+  android:name="flutter_deeplinking_enabled" 
+  android:value="true"
+/>
+
+<intent-filter android:autoVerify="true">
+
+
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+     <data android:scheme="http" />
+  <data android:host="192.168.1.11" />
+  <data android:pathPrefix="/activate/" />  
+    <data android:pathPrefix="/password/reset/confirm/" />  
+
+
+    <!-- <data android:scheme="http" android:host="192.168.1.11" android:pathPrefix="/activate" android:port="8000"/> -->
+</intent-filter>
+
+
+
+
+
+
+
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

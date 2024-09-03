@@ -9,10 +9,11 @@ class ImageAssets {
   // https://alisalhabqq11.000webhostapp.com/upload/hotellogo/
   static String roomex = 'assets/roomex.png';
   static String background = 'assets/background.png';
-    static String background2 = 'assets/background2.jpg';
-
+  static String background2 = 'assets/background2.jpg';
 
   static String nodatalottie = 'assets/lotties/nodata.json';
+  static String loginbackground = 'assets/core/bookinglogin.png';
+
   static String loadinglottie = 'assets/lotties/loading.json';
   static String serverfailurelottie = 'assets/lotties/notfound404.json';
   static String nointernetconnectionlottie = 'assets/lotties/nointernet.json';

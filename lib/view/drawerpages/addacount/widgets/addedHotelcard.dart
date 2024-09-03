@@ -10,10 +10,12 @@ class AddedHotelCard extends StatelessWidget {
   final String image;
   final String name;
   final String location;
-  void Function()? oncall;
-  void Function()? oncancel;
+  VoidCallback oncall;
+  VoidCallback oncancel;
   AddedHotelCard(
       {super.key,
+      required this.oncall,
+      required this.oncancel,
       required this.image,
       required this.name,
       required this.location});
@@ -64,7 +66,7 @@ class AddedHotelCard extends StatelessWidget {
                         child: Text(
                           "$name",
                           style:
-                              TextStyle(color: AppColors.main, fontSize: 20.sp),
+                              TextStyle(color: AppColors.main, fontSize: 16.sp),
                         ),
                       ),
                     ),
@@ -72,19 +74,18 @@ class AddedHotelCard extends StatelessWidget {
                       width: 45.w,
                       child: Text(
                         "$location",
-                        style:
-                            TextStyle(color: AppColors.main, fontSize: 12.sp),
+                        style: TextStyle(color: AppColors.grey, fontSize: 8.sp),
                       ),
                     )
                   ],
                 ),
                 Row(
                   children: [
-                    CancelButton(),
+                    CancelButton(ontap: oncancel),
                     SizedBox(
                       width: 5.sp,
                     ),
-                    Callbutton()
+                    Callbutton(oncall: oncall)
                   ],
                 )
               ],

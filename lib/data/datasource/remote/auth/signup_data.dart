@@ -7,13 +7,14 @@ class SignupData {
   SignupData(this.crud);
 
   postdata(String username, String fullname, String phone, String email,
-      String password) async {
+      String password, String repassword) async {
     var response = await crud.postdata(ApiApplinks.signup, {
       "fullname": fullname,
       "username": username,
       "phone": phone,
       "email": email,
-      "password": password
+      "password": password,
+      "re_password": repassword
     });
 
     // print(response);

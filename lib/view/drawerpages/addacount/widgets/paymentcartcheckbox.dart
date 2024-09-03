@@ -4,7 +4,10 @@ import 'package:sizer/sizer.dart';
 class PaymentCheckBox extends StatelessWidget {
   final String title;
   final bool val;
-  const PaymentCheckBox({super.key, required this.title, required this.val});
+  final void Function(bool?)? onchange;
+
+  const PaymentCheckBox(
+      {super.key, required this.title, required this.val, this.onchange});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class PaymentCheckBox extends StatelessWidget {
           ),
           Checkbox(
             value: val,
-            onChanged: (c) {},
+            onChanged: onchange,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(180)),
           ),

@@ -4,8 +4,11 @@ import 'package:super_admin/core/constants/route.dart';
 import 'package:super_admin/core/middleware/mymiddleware.dart';
 import 'package:super_admin/notifications.dart';
 import 'package:super_admin/view/Homepage/homepage.dart';
+import 'package:super_admin/view/auth/activateaccount.dart';
+import 'package:super_admin/view/auth/login.dart';
+import 'package:super_admin/view/auth/resetpasswordconfirmation.dart';
 import 'package:super_admin/view/auth/signup.dart';
-import 'package:super_admin/view/auth/successsignup.dart';
+import 'package:super_admin/view/auth/resetpassword.dart';
 import 'package:super_admin/view/detilspagee.dart';
 import 'package:super_admin/view/drawerpages/addacount/AccountApproval.dart';
 import 'package:super_admin/view/drawerpages/addacount/ContractAttachment.dart';
@@ -15,10 +18,12 @@ import 'package:super_admin/view/drawerpages/addacount/availabilityandrateprovid
 import 'package:super_admin/view/drawerpages/addacount/departmentcontactdetails.dart';
 import 'package:super_admin/view/drawerpages/addacount/minimumcommisions.dart';
 import 'package:super_admin/view/drawerpages/addacount/payment.dart';
+import 'package:super_admin/view/drawerpages/amenties/mainamenties.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/addcustomerdetails.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/addreservation.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/bedoptions.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/completedbooking.dart';
+import 'package:super_admin/view/drawerpages/manualreservation/confirmedreservation.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/guestoption.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/mainmanualreservation.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/payout.dart';
@@ -26,18 +31,24 @@ import 'package:super_admin/view/drawerpages/manualreservation/requestedreservat
 import 'package:super_admin/view/drawerpages/manualreservation/roomdetails.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/rooms.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/waitingreservation.dart';
-import 'package:super_admin/view/drawerpages/manualreservation/waitingreservations.dart';
 import 'package:super_admin/view/forgetpassword/verifycodeforgetpassword.dart';
-import 'package:super_admin/view/homepahe.dart';
 import 'package:super_admin/view/onboarding/onboarding.dart';
 
 import 'view/testwidgets.dart';
 
 List<GetPage<dynamic>>? getPages = [
-  // GetPage(
-  //     name: AppRoutes.login,
-  //     page: () => Login(),
-  //     middlewares: [MyMiddleware()]),
+  GetPage(
+    name: "/activate/",
+    page: () => ActivateAccountPage(),
+  ),
+  GetPage(
+    name: "/password/reset/confirm/",
+    page: () => ResetPasswordConfirmation(),
+  ),
+  GetPage(
+      name: AppRoutes.login,
+      page: () => Login(),
+      middlewares: [MyMiddleware()]),
 // ContractAttachment
   GetPage(
     name: AppRoutes.ContractAttachment,
@@ -134,7 +145,7 @@ List<GetPage<dynamic>>? getPages = [
 
   GetPage(
     name: AppRoutes.WaitingReservations,
-    page: () => const WaitingReservations(),
+    page: () => const WaitingReservation(),
     // AddReservatonGuestoptions
   ),
   GetPage(
@@ -145,6 +156,17 @@ List<GetPage<dynamic>>? getPages = [
   GetPage(
     name: AppRoutes.CompleteBooking,
     page: () => const CompleteBooking(),
+    // AddReservatonGuestoptions
+  ),
+
+  GetPage(
+    name: AppRoutes.ConfirmededReservation,
+    page: () => const ConfirmededReservation(),
+    // AddReservatonGuestoptions
+  ),
+  GetPage(
+    name: AppRoutes.MainAmenties,
+    page: () => const MainAmenties(),
     // AddReservatonGuestoptions
   ),
 ];

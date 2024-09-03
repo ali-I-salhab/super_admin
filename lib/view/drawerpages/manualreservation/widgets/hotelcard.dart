@@ -75,7 +75,9 @@ class HotelCard extends StatelessWidget {
                     SizedBox(
                       width: 5.sp,
                     ),
-                    Callbutton()
+                    Callbutton(
+                      oncall: () {},
+                    )
                   ],
                 )
               ],

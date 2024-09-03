@@ -1,68 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slide_drawer/flutter_slide_widget.dart';
-import 'package:sizer/sizer.dart';
-import 'package:super_admin/core/constants/colors.dart';
-import 'package:super_admin/core/functions/customappbar.dart';
-import 'package:super_admin/view/Homepage/widgets/customdrawer.dart';
-import 'package:super_admin/view/appIcons.dart';
-import 'package:super_admin/view/drawerpages/manualreservation/widgets/customdropbutton.dart';
-import 'package:super_admin/view/drawerpages/manualreservation/widgets/custompersoncardoption.dart';
-import 'package:super_admin/view/drawerpages/manualreservation/widgets/customroomoptionscard.dart';
-import 'package:super_admin/view/drawerpages/manualreservation/widgets/roomcard.dart';
+import 'package:super_admin/view/drawerpages/addacount/widgets/customAppbar.dart';
+import 'package:super_admin/view/drawerpages/manualreservation/widgets/customreservationcard.dart';
 
-class ConfirmedReservation extends StatefulWidget {
-  const ConfirmedReservation({super.key});
+class ConfirmededReservation extends StatelessWidget {
+  const ConfirmededReservation({super.key});
 
   @override
-  State<ConfirmedReservation> createState() =>
-      _AddReservationRoomDetailsState();
-}
-
-class _AddReservationRoomDetailsState extends State<ConfirmedReservation> {
-  @override
-  final GlobalKey<SliderDrawerWidgetState> drawerKey = GlobalKey();
-
   Widget build(BuildContext context) {
-    return SliderDrawerWidget(
-      key: drawerKey,
-      option: SliderDrawerOption(
-        // backgroundImage: toggleBackgroundState
-        // ? Image.asset("assets/sample_background.jpg")
-        // : Image.asset("assets/sample_background2.jpg"),
-        backgroundColor: AppColors.blue,
-        sliderEffectType: SliderEffectType.Rounded,
-        upDownScaleAmount: 30,
-        radiusAmount: 40,
-        direction: SliderDrawerDirection.LTR,
-      ),
-      drawer:
-          Container(margin: EdgeInsets.only(top: 40.sp), child: CustomDrawer()),
-      body: SafeArea(
-        child: Scaffold(
-          appBar: customappbar(drawerKey),
-          body: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Container(
-              margin: EdgeInsets.only(bottom: 20.sp),
-              child: Column(
-                children: [
-                  Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Row(
-                            children: [
-                              Checkbox(value: false, onChanged: (c) {})
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: CustomizableAppBar(
+          title: 'Confirmed  reservations', isactioned: false),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            CustomReservationCard(
+              step: 2,
+              ontap: () {},
             ),
-          ),
+            CustomReservationCard(
+              step: 3,
+              ontap: () {},
+            ),
+            CustomReservationCard(
+              step: 4,
+              ontap: () {},
+            ),
+            CustomReservationCard(
+              step: 5,
+              ontap: () {},
+            ),
+            CustomReservationCard(
+              step: 6,
+              ontap: () {},
+            ),
+            CustomReservationCard(
+              step: 7,
+              ontap: () {},
+            ),
+            CustomReservationCard(
+              step: 8,
+              ontap: () {},
+            )
+          ],
         ),
       ),
     );

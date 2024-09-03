@@ -39,7 +39,8 @@ dependencies:
   country_picker: ^2.0.21
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
-  dio: ^5.4.0
+  dio: ^4.0.6
+
   file_picker: ^5.3.3
   firebase_core: ^2.14.0
   firebase_messaging: ^14.6.4
@@ -72,13 +73,23 @@ dependencies:
   sizer: ^2.0.15
   # syncfusion_flutter_sliders: ^24.1.44
   time_range_picker: ^2.2.0
-  url_launcher: ^6.1.12
+  url_launcher: ^6.2.4
   # yandex_mapkit: ^3.3.3
   z_time_ago: ^0.1.2  
 
   flutter_slide_drawer: ^1.0.3
   csc_picker: ^0.2.7
   animations: ^2.0.8
+  dotted_border: ^2.1.0
+  jwt_decoder: ^2.0.1
+  geolocator: ^11.0.0
+  google_maps_flutter: ^2.5.3
+  pretty_dio_logger:
+  internet_connection_checker: ^1.0.0+1
+  error_handler: ^1.1.0
+  uni_links: ^0.5.1
+  go_router: ^13.2.0
+  animated_rating_stars: ^1.0.1
 
   # cupertino_icons: ^1.0.2
 

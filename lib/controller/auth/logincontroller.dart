@@ -26,7 +26,36 @@ class LogincontrollerImp extends Logincontroller {
   LoginData logindata = LoginData(Get.find());
   List data = [];
   MyServices myServices = Get.find();
-  @override
+
+  get formstatelogin => null;
+  Future<void> activateAccount(BuildContext context) async {
+    print(Get.currentRoute);
+    print(Uri.parse(Get.currentRoute).pathSegments);
+    List<String> data = Uri.parse(Get.currentRoute).pathSegments;
+    print("----------------------------------activate account");
+    final response = await logindata.activateaccount(
+      data[1], data[2],
+      // headers: {"Content-Type": "application/json"},
+    );
+    print("---------------------------> $response");
+    // print(response['token']);
+    // print(response.statusCode);
+    if (response['statuscode'] == 204) {
+      // Account activated successfully
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Account activated successfully!")),
+      );
+      Get.offNamed(AppRoutes.signup);
+      // Optionally navigate to login or home page
+    } else {
+      // Handle error
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Failed to activate account.")),
+      );
+      Get.offNamed(AppRoutes.signup);
+    }
+  }
+
   login() async {
     statusrequest = Statusrequest.loading;
     update();

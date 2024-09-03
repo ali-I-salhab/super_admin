@@ -5,8 +5,15 @@ import 'package:super_admin/core/constants/colors.dart';
 class SlideSwitcher extends StatefulWidget {
   final String first;
   final String second;
+  final Function()? ontapfirst;
+  final Function()? ontapsecond;
 
-  const SlideSwitcher({super.key, required this.first, required this.second});
+  const SlideSwitcher(
+      {super.key,
+      required this.first,
+      required this.second,
+      this.ontapfirst,
+      this.ontapsecond});
   @override
   _ToggleButtonState createState() => _ToggleButtonState();
 }
@@ -35,7 +42,7 @@ class _ToggleButtonState extends State<SlideSwitcher> {
   Widget build(BuildContext context) {
     return UnconstrainedBox(
       child: Container(
-          width: 80.w,
+          width: 85.w,
           height: 50.sp,
           margin: EdgeInsets.only(top: 2.sp),
           padding: EdgeInsets.all(10.sp),
@@ -76,6 +83,11 @@ class _ToggleButtonState extends State<SlideSwitcher> {
 
                     signInColor = normalColor;
                   });
+
+                  if (widget.ontapfirst != null) {
+                    widget.ontapfirst!();
+                  }
+                  // widget.ontapfirst ?? widget.ontapfirst!();
                 },
                 child: Align(
                   alignment: Alignment(-1, 0),
@@ -101,6 +113,11 @@ class _ToggleButtonState extends State<SlideSwitcher> {
 
                     loginColor = normalColor;
                   });
+                  if (widget.ontapsecond != null) {
+                    widget.ontapsecond!();
+                  }
+
+                  // widget.ontapsecond ?? widget.ontapsecond!();
                 },
                 child: Align(
                   alignment: Alignment(1, 0),
@@ -123,3 +140,6 @@ class _ToggleButtonState extends State<SlideSwitcher> {
     );
   }
 }
+
+// a??b
+// if a not null go with a else go with b

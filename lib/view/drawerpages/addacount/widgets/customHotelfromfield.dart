@@ -8,21 +8,26 @@ class CustomTextformfieldAddAccount extends StatelessWidget {
   final String hint;
   final bool islabel;
   final int maxlines;
+  final bool readonly;
+  // final void Function(String?)? onsave;
 
-  // final TextEditingController? mycontroller;
+  final TextEditingController? mycontroller;
   void Function()? ontap;
   final bool isphone;
   final String? Function(String?)? valid;
 
-  CustomTextformfieldAddAccount(
-      {super.key,
-      required this.title,
-      this.islabel = true,
-      // required this.mycontroller,
-      this.valid,
-      required this.hint,
-      this.isphone = false,
-      this.maxlines = 1});
+  CustomTextformfieldAddAccount({
+    super.key,
+    required this.title,
+    this.islabel = true,
+    // required this.mycontroller,
+    this.valid,
+    required this.hint,
+    this.isphone = false,
+    this.maxlines = 1,
+    this.mycontroller,
+    this.readonly = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,23 +52,42 @@ class CustomTextformfieldAddAccount extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(19),
                 ),
-                child: TextFormField(
-                  keyboardType: TextInputType.text,
-                  maxLines: maxlines,
-                  validator: valid,
-                  // controller: mycontroller,
-                  onEditingComplete: () {
-                    FocusManager.instance.primaryFocus?.unfocus();
-
-                    print("complete editing");
+                child: FocusScope(
+                  onFocusChange: (value) {
+                    if (value) {
+                      print("val : $value");
+                      //here checkAndUpdate();
+                    }
                   },
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.greytextformfield,
-                      hintText: "$hint",
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(19))),
+                  child: TextFormField(
+                    readOnly: readonly,
+                    // onChanged: (c) {
+                    //   print("onc");
+                    //   print(c);
+                    // },
+                    // onSaved: (v) {
+                    //   print('saved');
+                    // },
+                    // onFieldSubmitted: (d) {
+                    //   print(d);
+                    // },
+
+                    controller: mycontroller,
+                    keyboardType: TextInputType.text,
+                    maxLines: maxlines,
+                    validator: valid,
+                    // controller: mycontroller,
+                    onEditingComplete: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                    },
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: AppColors.greytextformfield,
+                        hintText: "$hint",
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(19))),
+                  ),
                 ),
               ),
             ],
@@ -81,7 +105,8 @@ class CustomTextformfieldAddAccount extends StatelessWidget {
                 ),
               ),
               IntlPhoneField(
-                // controller: mycontroller,
+                style: TextStyle(color: AppColors.main, height: 1.1.sp),
+                controller: mycontroller,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: AppColors.greytextformfield,

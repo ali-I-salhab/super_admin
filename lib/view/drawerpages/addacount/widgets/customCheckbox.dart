@@ -4,11 +4,13 @@ class CustomCheckBox extends StatelessWidget {
   final bool value;
   final String conent;
   final bool isactive;
-  const CustomCheckBox(
+  void Function(bool?)? oncjhanged;
+  CustomCheckBox(
       {super.key,
       required this.value,
       required this.conent,
-      this.isactive = true});
+      this.isactive = true,
+      this.oncjhanged});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,9 @@ class CustomCheckBox extends StatelessWidget {
           // fillColor: MaterialStateProperty.resolveWith(getColor),
           value: value,
           shape: CircleBorder(),
-          onChanged: (bool? value) {},
+          onChanged: (v) {
+            isactive ? oncjhanged!(v) : null;
+          },
         ),
         Text(
           "$conent",

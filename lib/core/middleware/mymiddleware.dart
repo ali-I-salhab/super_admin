@@ -12,7 +12,8 @@ class MyMiddleware extends GetMiddleware {
   @override
   MyServices serv = Get.find();
   RouteSettings? redirect(String? route) {
-    if (serv.shared.getString('step') == '2') {
+    print(serv.shared.getString('step'));
+    if (serv.shared.getString('accesstoken') != null) {
       return const RouteSettings(name: AppRoutes.homepage);
     }
     if (serv.shared.getString('step') == '1') {

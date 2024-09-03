@@ -7,6 +7,7 @@ class CustomTextformfieldAuth extends StatelessWidget {
   final String title;
   final String hint;
   final int maxlines;
+  final Iterable<String>? autofillhints;
 
   final TextEditingController? mycontroller;
   void Function()? ontap;
@@ -20,7 +21,8 @@ class CustomTextformfieldAuth extends StatelessWidget {
       this.valid,
       required this.hint,
       this.isphone = false,
-      this.maxlines = 1});
+      this.maxlines = 1,
+      this.autofillhints});
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class CustomTextformfieldAuth extends StatelessWidget {
                   maxLines: maxlines,
                   validator: valid,
                   controller: mycontroller,
+                  autofillHints: autofillhints,
                   onEditingComplete: () {
                     FocusManager.instance.primaryFocus?.unfocus();
 

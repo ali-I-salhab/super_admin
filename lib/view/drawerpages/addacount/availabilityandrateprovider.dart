@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:sizer/sizer.dart';
+import 'package:super_admin/controller/addacount/addhotelaccountcontroller.dart';
 import 'package:super_admin/core/constants/route.dart';
 import 'package:super_admin/view/drawerpages/addacount/widgets/customAppbar.dart';
 import 'package:super_admin/view/drawerpages/addacount/widgets/customCheckbox.dart';
@@ -13,6 +14,8 @@ class AvailabilityAndRateProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AddHotelAccountController controller = Get.find();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomizableAppBar(
@@ -38,27 +41,40 @@ class AvailabilityAndRateProvider extends StatelessWidget {
                 Text("Choose one from This"),
               ],
             ),
-            CustomCheckBox(
-              value: false,
-              conent: 'Manually by Account Admin',
-            ),
-            CustomCheckBox(
-              value: false,
-              conent: 'Manually by Travky Admin',
-            ),
-            CustomCheckBox(
-              isactive: false,
-              value: false,
-              conent: 'Travky Chanel Manager (soon)',
-            ),
-            CustomCheckBox(
-              isactive: false,
-              value: false,
-              conent: 'Chanel Manager (soon)',
-            ),
+            Obx(() => Column(children: [
+                  CustomCheckBox(
+                    value: controller.availabilityandrateprovider.value == "AA"
+                        ? true
+                        : false,
+                    conent: 'Manually by Account Admin',
+                    oncjhanged: (v) {
+                      controller.availabilityandrateprovider.value = 'aa';
+                    },
+                  ),
+                  CustomCheckBox(
+                    value: controller.availabilityandrateprovider.value == "ta"
+                        ? true
+                        : false,
+                    conent: 'Manually by Travky Admin',
+                    oncjhanged: (v) {
+                      controller.availabilityandrateprovider.value = 'ta';
+                    },
+                  ),
+                  CustomCheckBox(
+                    isactive: false,
+                    value: false,
+                    conent: 'Travky Chanel Manager (soon)',
+                  ),
+                  CustomCheckBox(
+                    isactive: false,
+                    value: false,
+                    conent: 'Chanel Manager (soon)',
+                  ),
+                ])),
             Expanded(child: Container()),
             CustomNextButton(
               ontap: () {
+                controller.save_availability_rate_provider_data();
                 Get.toNamed(AppRoutes.MinimumCommissions);
               },
             ),

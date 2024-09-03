@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:path/path.dart' as p;
 
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
@@ -20,7 +21,7 @@ imageuploadcamera() async {
   }
 }
 
-filesuploadgalllery({bool issvg = false}) async {
+Future<File?> filesuploadgalllery({bool issvg = false}) async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions:
@@ -48,22 +49,6 @@ Future<File> cropImage(File _pickedFile, context) async {
             toolbarWidgetColor: Colors.white,
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: false),
-        IOSUiSettings(
-          title: 'Cropper',
-        ),
-        WebUiSettings(
-          context: context,
-          presentStyle: CropperPresentStyle.dialog,
-          boundary: const CroppieBoundary(
-            width: 520,
-            height: 520,
-          ),
-          viewPort:
-              const CroppieViewPort(width: 480, height: 480, type: 'circle'),
-          enableExif: true,
-          enableZoom: true,
-          showZoomer: true,
-        ),
       ],
     );
     if (croppedFile != null) {
@@ -76,7 +61,7 @@ Future<File> cropImage(File _pickedFile, context) async {
 
 // open gallery yo upload image
 // here upload multiple images
-fileuploadgalllery({bool issvg = false}) async {
+Future<List<File>?> fileuploadgalllery({bool issvg = false}) async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: true,
       type: FileType.custom,
@@ -113,4 +98,17 @@ Future<File> getimagefrom_url_as_file({required String url}) async {
   file.writeAsBytesSync(res.data as List<int>);
 
   return file;
+}
+
+Future<File?> uploadexcelfile() async {
+  File file = File('path');
+  FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+  if (result != null) {
+    file = File(result.files.single.path!);
+    return file;
+  } else {
+    return null;
+    // User canceled the picker
+  }
 }

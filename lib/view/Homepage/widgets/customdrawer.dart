@@ -2,41 +2,51 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:sizer/sizer.dart';
+import 'package:super_admin/controller/hompage/homepagecontroller.dart';
 import 'package:super_admin/core/constants/imageassets.dart';
 import 'package:super_admin/core/constants/route.dart';
+import 'package:super_admin/core/services/services.dart';
+import 'package:super_admin/data/model/me.dart';
 import 'package:super_admin/view/Homepage/widgets/editprofile.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({Key? key}) : super(key: key);
+  final MeModel? me;
+  CustomDrawer({Key? key, this.me}) : super(key: key);
 
   Widget _thumbnailPart() {
+    MyServices serv = Get.find();
+    Map<String, dynamic> decodedToken =
+        JwtDecoder.decode(serv.shared.getString("accesstoken")!);
+
     return Row(
       children: [
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(10.sp),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  child: Image.asset(ImageAssets.profile),
-                ),
-                Text(
-                  "Eva",
-                  style: TextStyle(color: Colors.white, fontSize: 20.sp),
-                ),
-                Text(
-                  "super admin",
-                  style: TextStyle(color: Colors.white, fontSize: 10.sp),
-                ),
-                SizedBox(
-                  height: 10.sp,
-                ),
-                EditProfile()
-              ],
-            ),
-          ),
+              padding: EdgeInsets.all(10.sp),
+              child: GetBuilder<HomePageController>(builder: (controller) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      child: Image.asset(ImageAssets.profile),
+                    ),
+                    Text(
+                      me?.username ?? "null",
+                      style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                    ),
+                    Text(
+                      me?.email.toString() ?? "",
+                      style: TextStyle(color: Colors.white, fontSize: 10.sp),
+                    ),
+                    SizedBox(
+                      height: 10.sp,
+                    ),
+                    EditProfile()
+                  ],
+                );
+              })),
         ),
       ],
     );
@@ -78,6 +88,9 @@ class CustomDrawer extends StatelessWidget {
               icon: Icons.arrow_back_ios,
             ),
             MenuBox(
+              onTap: () {
+                Get.toNamed(AppRoutes.MainAmenties);
+              },
               name: 'Amenties',
               icon: Icons.arrow_back_ios,
             ),
@@ -122,7 +135,8 @@ class MenuBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      splashColor: Colors.red,
       onTap: () {
         if (onTap != null) {
           this.onTap!();

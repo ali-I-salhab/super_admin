@@ -1,29 +1,29 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:iconify_flutter/icons/arcticons.dart';
-import 'package:iconify_flutter/icons/fa_solid.dart';
-import 'package:iconify_flutter/icons/game_icons.dart';
-import 'package:iconify_flutter/icons/zondicons.dart';
+import 'package:path/path.dart' as p;
 import 'package:sizer/sizer.dart';
+import 'package:super_admin/controller/addacount/addaccontcontroller.dart';
+import 'package:super_admin/core/class/handlingdataview.dart';
 import 'package:super_admin/core/constants/colors.dart';
 import 'package:super_admin/core/constants/imageassets.dart';
 import 'package:super_admin/core/constants/route.dart';
-import 'package:super_admin/core/functions/customappbar.dart';
+import 'package:super_admin/core/functions/clicable.dart';
+import 'package:super_admin/core/functions/uploadfile.dart';
 import 'package:super_admin/view/appIcons.dart';
 import 'package:super_admin/view/drawerpages/addacount/widgets/addedHotelcard.dart';
 import 'package:super_admin/view/drawerpages/addacount/widgets/customAppbar.dart';
 import 'package:super_admin/view/drawerpages/addacount/widgets/custom_clips.dart';
 import 'package:super_admin/view/drawerpages/addacount/widgets/custom_slide_switcher.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:super_admin/view/drawerpages/amenties/functions/dialogus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AddAccount extends StatelessWidget {
   const AddAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AddAccountController controller = Get.put(AddAccountController());
     return Scaffold(
       extendBody: true, // <--- do not forget mark this as true
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -88,99 +88,141 @@ class AddAccount extends StatelessWidget {
                       children: [Icon(Icons.add), Text('New Account ')],
                     ),
                   ),
+                  PopupMenuItem(
+                    onTap: () async {
+                      controller.uplodedexcelfile = await uploadexcelfile();
+                      if (controller.uplodedexcelfile != null) {
+                        print(controller.uplodedexcelfile!.path);
+                        print(p.extension(controller.uplodedexcelfile!.path));
+                        if (p.extension(controller.uplodedexcelfile!.path) !=
+                            ".xlsx") {
+                          Get.snackbar('Error', 'File is not excel type',
+                              backgroundColor: Colors.red.withOpacity(0.1),
+                              snackPosition: SnackPosition.TOP);
+                        } else {
+                          await controller.uploadexcelfiles();
+                        }
+                      } else {
+                        Get.snackbar('Error', 'No file selected',
+                            backgroundColor: Colors.red.withOpacity(0.1),
+                            snackPosition: SnackPosition.TOP);
+                      }
+                    },
+                    child: Row(
+                      children: [Icon(Icons.add), Text('Upload excel file')],
+                    ),
+                  ),
                   // PopupMenuItem(child: Text('ali'))
                 ]);
           }),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SlideSwitcher(
-                first: 'Manual',
-                second: 'Requested',
-              ),
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.all(12.sp),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  CustomClips(
-                    name: 'Hotels',
-                    iconasString: AppIcons.hotel,
-                  ),
-                  CustomClips(
-                    name: 'Activity',
-                    iconasString: AppIcons.Activity,
-                  ),
-                  CustomClips(
-                    name: 'Accounts',
-                    iconasString: AppIcons.person,
-                  ),
-                  CustomClips(
-                    name: 'Accounts',
-                    iconasString: AppIcons.person,
-                  ),
-                  CustomClips(
-                    name: 'Accounts',
-                    iconasString: AppIcons.person,
-                  ),
-                  CustomClips(
-                    name: 'Accounts',
-                    iconasString: AppIcons.person,
-                  ),
-                ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          // if (controller.hotels.isNotEmpty) {
+          //   Get.snackbar("Warning", "Hotel list updated");
+          // } else {
+          await controller.viewhotels();
+          // }
+        },
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SlideSwitcher(
+                  first: 'Manual',
+                  second: 'Requested',
+                ),
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.all(12.sp),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    CustomClips(
+                      name: 'Hotels',
+                      iconasString: AppIcons.hotel,
+                    ),
+                    CustomClips(
+                      name: 'Activity',
+                      iconasString: AppIcons.Activity,
+                    ),
+                    CustomClips(
+                      name: 'Accounts',
+                      iconasString: AppIcons.person,
+                    ),
+                    CustomClips(
+                      name: 'Accounts',
+                      iconasString: AppIcons.person,
+                    ),
+                    CustomClips(
+                      name: 'Accounts',
+                      iconasString: AppIcons.person,
+                    ),
+                    CustomClips(
+                      name: 'Accounts',
+                      iconasString: AppIcons.person,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Expanded(
-            // height: 65.h,
-            // padding: EdgeInsets.symmetric(horizontal: 4.sp),
-            // margin: EdgeInsets.symmetric(vertical: 12.sp),
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  AddedHotelCard(
-                    image: ImageAssets.profile,
-                    name: 'Hotel name',
-                    location: 'Syria_tartous',
-                  ),
-                  AddedHotelCard(
-                    image: ImageAssets.profile,
-                    name: 'Hotel name',
-                    location: 'Syria_tartous',
-                  ),
-                  AddedHotelCard(
-                    image: ImageAssets.profile,
-                    name: 'Hotel name',
-                    location: 'Syria_tartous',
-                  ),
-                  AddedHotelCard(
-                    image: ImageAssets.profile,
-                    name: 'Hotel name',
-                    location: 'Syria_tartous',
-                  ),
-                  AddedHotelCard(
-                    image: ImageAssets.profile,
-                    name: 'Hotel name',
-                    location: 'Syria_tartous',
-                  ),
-                  AddedHotelCard(
-                    image: ImageAssets.profile,
-                    name: 'Hotel name',
-                    location: 'Syria_tartous',
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
+            Expanded(
+              // height: 65.h,
+              // padding: EdgeInsets.symmetric(horizontal: 4.sp),
+              // margin: EdgeInsets.symmetric(vertical: 12.sp),
+              child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child:
+                      GetBuilder<AddAccountController>(builder: (controller) {
+                    return Handlingdataview(
+                        statusrequest: controller.statusrequest,
+                        widget: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ...List.generate(
+                              controller.hotels.length,
+                              (index) => Clicable(
+                                ontap: () {
+                                  Get.toNamed(AppRoutes.addhotelaccount,
+                                      arguments: {
+                                        "hotel": controller.hotels[index]
+                                      });
+                                },
+                                child: AddedHotelCard(
+                                  oncall: () async {
+                                    String phone = controller
+                                        .hotels[index].phone
+                                        .toString();
+                                    if (phone == "") {
+                                      Get.snackbar("Warning",
+                                          "phone number not available");
+                                    } else {
+                                      await launchUrl(Uri.parse('tel:$phone'));
+                                    }
+                                  },
+                                  oncancel: () {
+                                    showdeletedialogue(() {
+                                      controller.deletehotel(controller
+                                          .hotels[index].id!
+                                          .toString());
+                                    });
+                                  },
+                                  image: ImageAssets.profile,
+                                  name: controller.hotels[index].nameen!,
+                                  location:
+                                      controller.hotels[index].location ?? "",
+                                ),
+                              ),
+                            )
+                          ],
+                        ));
+                  })),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -6,8 +6,8 @@ class HomeData {
   Crud crud;
   HomeData(this.crud);
 
-  getrooms() async {
-    var response = await crud.postdata(ApiApplinks.getrooms, {});
+  getme() async {
+    var response = await crud.Sendrequest('GET', ApiApplinks.me);
 
     // print(response);
     return response.fold((l) => l, (r) => r);

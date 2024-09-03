@@ -7,8 +7,9 @@ import 'package:super_admin/core/constants/route.dart';
 
 class DoneButton extends StatelessWidget {
   final void Function() ontap;
+  final Color? buttoncolor;
 
-  DoneButton({super.key, required this.ontap});
+  DoneButton({super.key, required this.ontap, this.buttoncolor});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,8 @@ class DoneButton extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 5.sp),
         decoration: BoxDecoration(
-            color: AppColors.main, borderRadius: BorderRadius.circular(8.sp)),
+            color: buttoncolor ?? AppColors.main,
+            borderRadius: BorderRadius.circular(8.sp)),
         child: Text(
           'Done',
           style: TextStyle(color: Colors.white),

@@ -5,10 +5,18 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:super_admin/core/class/handlingdataview.dart';
+import 'package:super_admin/core/constants/apptextstyle.dart';
 import 'package:super_admin/core/constants/colors.dart';
+import 'package:super_admin/core/constants/imageassets.dart';
+import 'package:super_admin/core/constants/route.dart';
 import 'package:super_admin/core/functions/alertexitapp.dart';
+import 'package:super_admin/core/functions/clicable.dart';
+import 'package:super_admin/view/appIcons.dart';
 import 'package:super_admin/view/auth/widgets/customSwitchslider.dart';
+import 'package:super_admin/view/drawerpages/addacount/widgets/custom_slide_switcher.dart';
+import 'package:super_admin/view/drawerpages/manualreservation/widgets/customdonebutton.dart';
 import 'package:super_admin/view/widgets/auth/authtextformfield.dart';
 import 'package:super_admin/view/widgets/auth/logo.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -32,192 +40,264 @@ class Signup extends StatelessWidget {
     ScrollController scroller = ScrollController();
 
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          elevation: 0,
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          shadowColor: Colors.white,
-          title: Text('17'.tr, style: Theme.of(context).textTheme.displayLarge),
-        ),
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
         body: WillPopScope(
             onWillPop: alertexitpp,
             child: Container(
+              // height: 90.h,
               margin: EdgeInsets.all(10.sp),
               child: ListView(
                 physics: BouncingScrollPhysics(),
                 children: [
-                  Text(
-                    "Welcome !!!",
-                    style: GoogleFonts.poppins(fontSize: 20.sp),
-                  ),
-                  Text(
-                    "Sign up or Login to your Account",
-                    style: GoogleFonts.poppins(
-                        fontSize: 10.sp, color: AppColors.grey),
-                  ),
-                  SizedBox(
-                    height: 1.h,
-                  ),
+                  SlideSwitcher(
+                    first: 'Login',
+                    second: 'Signup',
+                    ontapfirst: () {
+                      controller.buttonstatus == "signup";
 
-                  GetBuilder<SignupcontrollerImp>(builder: (controller) {
-                    return CustomSWitchslider(
-                      controller: controller,
-                    );
-                  }),
-                  AnimatedSlider(),
-                  // const LogoAuth(),
-                  // const LogoAuth(),
+                      controller.isloginpahe = !controller.isloginpahe;
+
+                      controller.update();
+                    },
+                    ontapsecond: () {
+                      controller.buttonstatus == "login";
+
+                      controller.isloginpahe = !controller.isloginpahe;
+
+                      controller.update();
+                    },
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(12.sp),
+                    child: Image.asset(ImageAssets.loginbackground),
+                  ),
                   GetBuilder<SignupcontrollerImp>(
                     builder: ((controller) {
                       return controller.isloginpahe
-                          ? GestureDetector(
-                              onHorizontalDragStart: (df) {
-                                controller.buttonstatus == "signup"
-                                    ? controller.buttonstatus = 'login'
-                                    : controller.buttonstatus = 'signup';
-                                controller.isloginpahe =
-                                    !controller.isloginpahe;
-
-                                controller.update();
-                              },
-                              onHorizontalDragEnd: (s) {
-                                print("$s rrrrrrrrr");
-                                controller.buttonstatus == "signup"
-                                    ? controller.buttonstatus = 'login'
-                                    : controller.buttonstatus = 'signup';
-                                controller.isloginpahe =
-                                    !controller.isloginpahe;
-
-                                controller.update();
-                              },
-                              child: Form(
-                                key: _formKey,
-                                child: Container(
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 3.h,
-                                      ),
-                                      CustomTextformfieldAuth(
-                                        title: "Full name",
-                                        hint: "Enter your full name",
-                                        mycontroller: controller.fullname,
+                          ? Form(
+                              key: _formKey,
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 3.h,
+                                    ),
+                                    CustomTextformfieldAuth(
+                                      title: "Full name",
+                                      hint: "Enter your full name",
+                                      autofillhints: [AutofillHints.name],
+                                      mycontroller: controller.fullname,
+                                      valid: (val) {
+                                        return validate(
+                                            val.toString(), 5, 100, 'username');
+                                      },
+                                    ),
+                                    CustomTextformfieldAuth(
+                                      autofillhints: [AutofillHints.username],
+                                      title: "username",
+                                      hint: "Enter your user-name",
+                                      mycontroller: controller.username,
+                                      valid: (val) {
+                                        return validate(
+                                            val.toString(), 5, 100, 'username');
+                                      },
+                                    ),
+                                    CustomTextformfieldAuth(
+                                        autofillhints: [AutofillHints.email],
+                                        mycontroller: controller.email,
+                                        valid: (val) {
+                                          return validate(
+                                              val.toString(), 5, 100, 'email');
+                                        },
+                                        title: "Email",
+                                        hint: "Enter your Email"),
+                                    CustomTextformfieldAuth(
+                                        autofillhints: [
+                                          AutofillHints.telephoneNumber
+                                        ],
+                                        isphone: true,
+                                        mycontroller: controller.phone,
+                                        valid: (val) {
+                                          return validate(
+                                              val.toString(), 5, 100, 'email');
+                                        },
+                                        title: "Phone number",
+                                        hint: "Enter your phone"),
+                                    CustomTextformfieldAuth(
+                                        mycontroller: controller.password,
                                         valid: (val) {
                                           return validate(val.toString(), 5,
-                                              100, 'username');
+                                              100, 'password');
                                         },
-                                      ),
-                                      CustomTextformfieldAuth(
-                                        title: "username",
-                                        hint: "Enter your user-name",
-                                        mycontroller: controller.username,
+                                        title: "Create Password",
+                                        hint: "Enter your password"),
+                                    CustomTextformfieldAuth(
+                                        mycontroller: controller.repassword,
                                         valid: (val) {
                                           return validate(val.toString(), 5,
-                                              100, 'username');
+                                              100, 'password');
                                         },
+                                        title: "retype your password",
+                                        hint: "Enter your password again"),
+                                    InkWell(
+                                      child: Container(
+                                        width: double.infinity,
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 12.sp, horizontal: 12.sp),
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: 12.sp, horizontal: 12.sp),
+                                        decoration: BoxDecoration(
+                                            color: AppColors.main,
+                                            borderRadius:
+                                                BorderRadius.circular(12.sp)),
+                                        child: Center(
+                                          child: Text(
+                                            "Sign in",
+                                            style: AppTextStyle.mainwhite,
+                                          ),
+                                        ),
                                       ),
-                                      CustomTextformfieldAuth(
-                                          mycontroller: controller.email,
-                                          valid: (val) {
-                                            return validate(val.toString(), 5,
-                                                100, 'email');
-                                          },
-                                          title: "Email",
-                                          hint: "Enter your Email"),
-                                      CustomTextformfieldAuth(
-                                          isphone: true,
-                                          mycontroller: controller.phone,
-                                          valid: (val) {
-                                            return validate(val.toString(), 5,
-                                                100, 'email');
-                                          },
-                                          title: "Phone number",
-                                          hint: "Enter your phone"),
-                                      CustomTextformfieldAuth(
-                                          mycontroller: controller.password,
-                                          valid: (val) {
-                                            return validate(val.toString(), 5,
-                                                100, 'password');
-                                          },
-                                          title: "Create Password",
-                                          hint: "Enter your password"),
-                                      ElevatedButton(
-                                        child: Text("elevated"),
-                                        onPressed: () async {
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            await controller.signup();
-                                          }
-                                        },
-                                      )
-                                    ],
-                                  ),
+                                      onTap: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          await controller.signup();
+                                        }
+                                      },
+                                    ),
+                                  ],
                                 ),
                               ),
                             )
                           : Form(
                               key: _formKey,
-                              child: GestureDetector(
-                                onHorizontalDragStart: (df) {
-                                  controller.buttonstatus == "signup"
-                                      ? controller.buttonstatus = 'login'
-                                      : controller.buttonstatus = 'signup';
-                                  controller.isloginpahe =
-                                      !controller.isloginpahe;
-
-                                  controller.update();
-                                },
-                                onHorizontalDragEnd: (s) {
-                                  print("$s rrrrrrrrr");
-                                  controller.buttonstatus == "signup"
-                                      ? controller.buttonstatus = 'login'
-                                      : controller.buttonstatus = 'signup';
-                                  controller.isloginpahe =
-                                      !controller.isloginpahe;
-
-                                  controller.update();
-                                },
-                                child: Column(
-                                  children: [
-                                    LogoAuth(),
-                                    CustomTextformfieldAuth(
-                                        valid: (val) {
-                                          return validate(
-                                              val.toString(), 5, 100, 'email');
+                              child: Column(
+                                children: [
+                                  CustomTextformfieldAuth(
+                                      valid: (val) {
+                                        return validate(
+                                            val.toString(), 5, 100, 'email');
+                                      },
+                                      mycontroller: controller.loginemail,
+                                      // logincontroller.email,
+                                      title: "Email",
+                                      hint: "Enter your Email"),
+                                  CustomTextformfieldAuth(
+                                      valid: (val) {
+                                        return validate(
+                                            val.toString(), 5, 100, 'password');
+                                      },
+                                      mycontroller: controller.password,
+                                      title: "Enter password",
+                                      hint: "Enter your password"),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(child: SizedBox()),
+                                      Clicable(
+                                        ontap: () {
+                                          Get.toNamed(AppRoutes.success);
                                         },
-                                        mycontroller: controller.loginemail,
-                                        // logincontroller.email,
-                                        title: "Email",
-                                        hint: "Enter your Email"),
-                                    CustomTextformfieldAuth(
-                                        valid: (val) {
-                                          return validate(val.toString(), 5,
-                                              100, 'password');
-                                        },
-                                        mycontroller: controller.password,
-                                        title: "Enter password",
-                                        hint: "Enter your password"),
-                                    Handlingdataview(
-                                      statusrequest: controller.statusrequest!,
-                                      widget: ElevatedButton(
-                                        child: Text("sdsdsd"),
-                                        onPressed: () async {
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            // Get.offAllNamed(AppRoutes.AuthPage);
-                                            await controller.login();
-
-                                            print(
-                                                "----------------------------");
-                                          }
-                                          // await logincontroller.login();
-                                        },
+                                        child: RichText(
+                                            textAlign: TextAlign.left,
+                                            text: TextSpan(children: [
+                                              TextSpan(
+                                                  text: "Forget password",
+                                                  style: TextStyle(
+                                                      color: Colors.blue))
+                                            ])),
                                       ),
-                                    )
-                                    // CustomTextFormField(label: label, valid: valid, icon: icon, mycontroller: mycontroller, hint: hint, isnumeric: isnumeric)
-                                  ],
-                                ),
+                                    ],
+                                  ),
+
+                                  InkWell(
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 12.sp, horizontal: 12.sp),
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 12.sp, horizontal: 12.sp),
+                                      decoration: BoxDecoration(
+                                          color: AppColors.main,
+                                          borderRadius:
+                                              BorderRadius.circular(12.sp)),
+                                      child: Center(
+                                        child: Text(
+                                          "Sign in",
+                                          style: AppTextStyle.mainwhite,
+                                        ),
+                                      ),
+                                    ),
+                                    onTap: () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        // Get.offAllNamed(AppRoutes.AuthPage);
+                                        await controller.login();
+
+                                        print("----------------------------");
+                                      }
+                                      // await logincontroller.login();
+                                    },
+                                  ),
+
+                                  Row(children: <Widget>[
+                                    Expanded(child: Divider()),
+                                    Text(
+                                      " or log in with ",
+                                      style: AppTextStyle.greysmall,
+                                    ),
+                                    Expanded(child: Divider()),
+                                  ]),
+                                  SizedBox(
+                                    height: 12.sp,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Container(
+                                        height: 40.sp,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black12,
+                                                spreadRadius: 2,
+                                                blurRadius: 2,
+                                                blurStyle: BlurStyle.outer),
+                                          ],
+                                        ),
+                                        child: Iconify(AppIcons.google),
+                                      ),
+                                      Container(
+                                        height: 40.sp,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black12,
+                                                spreadRadius: 2,
+                                                blurRadius: 2,
+                                                blurStyle: BlurStyle.outer),
+                                          ],
+                                        ),
+                                        child: Iconify(AppIcons.facebook),
+                                      ),
+                                      Container(
+                                        height: 40.sp,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black12,
+                                                spreadRadius: 2,
+                                                blurRadius: 2,
+                                                blurStyle: BlurStyle.outer),
+                                          ],
+                                        ),
+                                        child: Iconify(AppIcons.apple),
+                                      ),
+                                    ],
+                                  )
+                                  // CustomTextFormField(label: label, valid: valid, icon: icon, mycontroller: mycontroller, hint: hint, isnumeric: isnumeric)
+                                ],
                               ));
                     }),
                   ),

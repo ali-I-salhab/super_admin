@@ -6,8 +6,10 @@ import 'package:super_admin/core/constants/colors.dart';
 import 'package:super_admin/core/constants/imageassets.dart';
 import 'package:super_admin/core/constants/route.dart';
 import 'package:sizer/sizer.dart';
+import 'package:super_admin/data/model/me.dart';
 
-PreferredSizeWidget customappbar(GlobalKey<SliderDrawerWidgetState> drawerKey) {
+PreferredSizeWidget customappbar(GlobalKey<SliderDrawerWidgetState> drawerKey,
+    [MeModel? me]) {
   return PreferredSize(
       preferredSize: Size(100.w, 25.h),
       child: Stack(

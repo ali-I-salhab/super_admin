@@ -3,15 +3,18 @@ import 'package:flutter_slide_drawer/flutter_slide_widget.dart';
 import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:super_admin/core/constants/apptextstyle.dart';
 import 'package:super_admin/core/constants/colors.dart';
 import 'package:super_admin/core/constants/route.dart';
 import 'package:super_admin/core/functions/customappbar.dart';
 import 'package:super_admin/view/Homepage/widgets/customdrawer.dart';
 import 'package:super_admin/view/appIcons.dart';
+import 'package:super_admin/view/drawerpages/addacount/widgets/customStepper.dart';
 import 'package:super_admin/view/drawerpages/addacount/widgets/custom_clips.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/customdonebutton.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/customdropbutton.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/custompersoncardoption.dart';
+import 'package:super_admin/view/drawerpages/manualreservation/widgets/customreservationcard.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/customroomoptionscard.dart';
 import 'package:super_admin/view/drawerpages/manualreservation/widgets/roomcard.dart';
 
@@ -86,33 +89,42 @@ class _AddReservationRoomDetailsState extends State<MainManualReservation> {
                         ),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal: 5.sp, vertical: 5.sp),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 12.sp, vertical: 5.sp),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.sp),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black38,
-                                spreadRadius: 2,
-                                blurStyle: BlurStyle.outer,
-                                blurRadius: 2)
-                          ]),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: AppColors.main, shape: BoxShape.circle),
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
+                    InkWell(
+                      borderRadius: BorderRadius.circular(12.sp),
+                      splashColor: AppColors.main,
+                      splashFactory: InkSplash.splashFactory,
+                      onTap: () {
+                        Get.toNamed(AppRoutes.ConfirmededReservation);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 5.sp, vertical: 5.sp),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.sp, vertical: 5.sp),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.sp),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black38,
+                                  spreadRadius: 2,
+                                  blurStyle: BlurStyle.outer,
+                                  blurRadius: 2)
+                            ]),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: AppColors.main,
+                                  shape: BoxShape.circle),
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                          Text('   Add New Manual Reservation')
-                        ],
+                            Text('   Add New Manual Reservation')
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -143,7 +155,34 @@ class _AddReservationRoomDetailsState extends State<MainManualReservation> {
                     SizedBox(
                       height: 12.sp,
                     ),
-                    Text('data')
+                    CustomReservationCard(
+                      step: 2,
+                      ontap: () {},
+                    ),
+                    CustomReservationCard(
+                      step: 3,
+                      ontap: () {},
+                    ),
+                    CustomReservationCard(
+                      step: 4,
+                      ontap: () {},
+                    ),
+                    CustomReservationCard(
+                      step: 5,
+                      ontap: () {},
+                    ),
+                    CustomReservationCard(
+                      step: 6,
+                      ontap: () {},
+                    ),
+                    CustomReservationCard(
+                      step: 7,
+                      ontap: () {},
+                    ),
+                    CustomReservationCard(
+                      step: 8,
+                      ontap: () {},
+                    ),
                   ],
                 )),
           ),
