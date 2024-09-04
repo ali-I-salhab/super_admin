@@ -192,8 +192,8 @@ class AddHotelAccount extends StatelessWidget {
                   width: double.infinity,
                   child: MapSample(
                       position: Position(
-                          longitude: controller.hotel!.long ?? 0,
-                          latitude: controller.hotel!.lat ?? 0,
+                          longitude: controller.hotel?.long ?? 0,
+                          latitude: controller.hotel?.lat ?? 0,
                           timestamp: DateTime.now(),
                           altitude: 0,
                           accuracy: 0,
@@ -306,7 +306,7 @@ class AddHotelAccount extends StatelessWidget {
                   color: AppColors.main,
                 ),
                 GetBuilder<AddHotelAccountController>(builder: (c) {
-                  return controller.hotel!.photos!.length != 0
+                  return controller.hotel?.photos?.length != 0
                       ? Row(
                           children: [
                             Text(
@@ -338,7 +338,9 @@ class AddHotelAccount extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ...List.generate(
-                            controller.hotel!.photos!.length,
+                            controller.hotel?.photos != null
+                                ? controller.hotel!.photos!.length
+                                : 0,
                             (index) => Clicable(
                               ontap: () {
                                 showdeletedialogue(() async {
@@ -355,15 +357,63 @@ class AddHotelAccount extends StatelessWidget {
                                 // color: Colors.red,
                                 margin: EdgeInsets.symmetric(horizontal: 4.sp),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12.sp),
-                                  child: CachedNetworkImage(
-                                      height: 20.h,
-                                      width: 20.w,
-                                      fit: BoxFit.cover,
-                                      imageUrl: ApiApplinks.serverimage +
-                                          controller
-                                              .hotel!.photos![index].photo!),
-                                ),
+                                    borderRadius: BorderRadius.circular(12.sp),
+                                    // child: Image.network(
+                                    // "http://www.pythonanywhere.com/user/ali33salhab/files/home/ali33salhab/deployingbookingapp/media/hotel/photos/Screenshot_20240903-055614_Facebook.png"),
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          "https://www.pythonanywhere.com/user/ali33salhab/files/home/ali33salhab/deployingbookingapp/media/hotel/photos/Screenshot_20240903-055614_Facebook.png",
+                                      // imageUrl: ApiApplinks.hotelimages +
+                                      //     controller
+                                      //         .hotel!.photos![index].photo!,
+                                      imageBuilder: (context, imageProvider) {
+                                        // Call your widget or use native ui
+                                        return Container(
+                                          height: height,
+                                          width: width,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      placeholderFadeInDuration: Duration(
+                                          microseconds:
+                                              10), // The duration of the fade-in animation for the [placeholder]
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) {
+                                        // use any loader or use native ui
+                                        return CircularProgressIndicator
+                                            .adaptive(
+                                          backgroundColor: Colors.red,
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.red),
+                                        );
+                                      },
+
+                                      errorWidget: (context, url, error) {
+                                        // Call your error widget or use native ui
+                                        return Center(child: Icon(Icons.image));
+                                      },
+                                      fadeInDuration:
+                                          Duration(milliseconds: 10),
+                                      fadeOutDuration:
+                                          Duration(milliseconds: 10),
+                                      fit: BoxFit.fill,
+                                      height: height,
+                                      width: height,
+                                      // // useOldImageOnUrlChange: true,
+                                      // memCacheWidth: cacheWidth.round(),
+                                      // memCacheHeight: cacheHeight.round(),
+                                    )
+
+                                    // imageUrl: ApiApplinks.hotelimages +
+                                    //     controller
+                                    //         .hotel!.photos![index].photo!),
+                                    ),
                               ),
                             ),
                           )

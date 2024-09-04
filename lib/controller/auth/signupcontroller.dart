@@ -107,7 +107,6 @@ class SignupcontrollerImp extends Signupcontroller {
           height: 20.sp,
           child: CircularProgressIndicator(),
         ));
-    await Future.delayed(Duration(seconds: 4));
 
     update();
     var response = await logindata.postdata(
@@ -123,25 +122,24 @@ class SignupcontrollerImp extends Signupcontroller {
     if (statusrequest == Statusrequest.success) {
       if (response['status'] == 'success') {
         print(response);
-        me = await getme();
         // myServices.shared.setString('id', response['data']['customer_id']);
         myServices.shared.setString('accesstoken', response['data']['access']);
         myServices.shared
             .setString('refreshtoken', response['data']['refresh']);
+        // me = await getme();
 
-        myServices.shared.setString('email', me['data']['email']);
-        myServices.shared.setString('username', me['data']['username']);
+        // myServices.shared.setString('email', me['data']['email']);
+        // myServices.shared.setString('username', me['data']['username']);
 
-        myServices.shared.setString('phone', me['data']['[phone]']);
+        // myServices.shared.setString('phone', me['data']['[phone]']);
 
-        myServices.shared.setString('first_name', me['data']['first_name']);
-        myServices.shared.setString('last_name', me['data']['last_name']);
+        // myServices.shared.setString('first_name', me['data']['first_name']);
+        // myServices.shared.setString('last_name', me['data']['last_name']);
 
-        myServices.shared.setString('is_active', me['data']['is_active']);
+        // myServices.shared.setString('is_active', me['data']['is_active']);
 
-        myServices.shared.setString('id', me['data']['id']);
-
-        // myServices.shared
+        // myServices.shared.setString('id', me['data']['id']);
+        // // myServices.shared
         //     .setString('phone', response['data']['customer_phone']);
         // myServices.shared
         //     .setString('username', response['data']['customer_name']);
@@ -174,6 +172,8 @@ class SignupcontrollerImp extends Signupcontroller {
     update();
     await Future.delayed(Duration(seconds: 5));
     var response = await homeData.getme();
+    print("me response ---------------->");
+    print(response);
 
     mestatusrequest = handlingdata(response);
     update();
@@ -201,7 +201,6 @@ class SignupcontrollerImp extends Signupcontroller {
           height: 20.sp,
           child: CircularProgressIndicator(),
         ));
-    await Future.delayed(Duration(seconds: 4));
     update();
     var response = await signupdata.postdata(
         username.text.toString(),
@@ -216,12 +215,12 @@ class SignupcontrollerImp extends Signupcontroller {
     if (statusrequest == Statusrequest.success) {
       if (response['status'] == 'success') {
         // data.addAll(response['data']);
-        Get.toNamed(AppRoutes.login, arguments: {'email': email.text});
+        Get.toNamed(AppRoutes.signup, arguments: {'email': email.text});
 
         Get.snackbar(
             'success', 'press activation linke which  sended to :${email.text}',
             dismissDirection: DismissDirection.horizontal,
-            duration: Duration(seconds: 3),
+            duration: Duration(seconds: 7),
             backgroundColor: AppColors.primarycolor);
       } else {
         Get.defaultDialog(

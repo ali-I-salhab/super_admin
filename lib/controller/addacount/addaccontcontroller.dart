@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:country_state_city/models/country.dart';
+import 'package:country_state_city/models/state.dart' as a;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -12,6 +14,11 @@ import 'package:super_admin/data/model/hotelmodel.dart';
 
 class AddAccountController extends GetxController {
   List<HotelModel> hotels = [];
+  Country? selectedcountry;
+  RxString countreyfilter = "".obs;
+  RxString cityfilter = "".obs;
+  List<a.State>? states;
+
   Statusrequest statusrequest = Statusrequest.none;
   AddAccountData accountData = AddAccountData(Get.find());
   File? uplodedexcelfile;
@@ -25,17 +32,24 @@ class AddAccountController extends GetxController {
           height: 20.sp,
           child: CircularProgressIndicator(),
         ));
-    await Future.delayed(Duration(seconds: 5));
 
     var response = await accountData.uploadexcelfiles(uplodedexcelfile!);
     print(response);
     Get.back();
     if (response['status'] == 'success') {
-      // await viewhotels();
-    } else {}
+      await viewhotels();
+    } else {
+      Get.defaultDialog(
+          barrierDismissible: false,
+          title: "processing",
+          content: Container(
+            width: 20.sp,
+            height: 20.sp,
+            child: Text("Error uploading excel file"),
+          ));
+    }
 
     print(response);
-
   }
 
   viewhotels() async {
@@ -61,6 +75,16 @@ class AddAccountController extends GetxController {
 
   deletehotel(String hotelid) async {
     print('Getting data');
+    Get.back();
+    Get.defaultDialog(
+        barrierDismissible: false,
+        title: "processing",
+        content: Container(
+          width: 20.sp,
+          height: 20.sp,
+          child: CircularProgressIndicator(),
+        ));
+
     statusrequest = Statusrequest.loading;
     update();
     var response = await accountData.deletehotle(hotelid);
@@ -69,7 +93,9 @@ class AddAccountController extends GetxController {
 
     if (statusrequest == Statusrequest.success) {
       if (response['status'] == 'success') {
+        Get.back();
         print(response);
+        hotels.removeWhere((element) => element.id == hotelid);
         print("delete hotel successfully");
       } else {
         statusrequest = Statusrequest.failure;

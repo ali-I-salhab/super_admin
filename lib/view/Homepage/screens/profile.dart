@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:super_admin/controller/hompage/homepagecontroller.dart';
 import 'package:super_admin/core/class/handlingdataview.dart';
+import 'package:super_admin/core/constants/route.dart';
 import 'package:super_admin/core/functions/customappbar.dart';
 import 'package:super_admin/view/Homepage/widgets/bottomnavbar.dart';
 
@@ -101,25 +102,17 @@ class Profile extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      await controller.serv.shared.clear();
+                      Get.offAllNamed(AppRoutes.signup);
                       // Handle Edit Profile action
                     },
-                    child: Text('Edit Profile'),
+                    child: Text('Log out'),
                     // style: ElevatedButton.styleFrom(
                     //   minimumSize: Size(50, 50), // Make button full width
                     // ),
                   ),
                   SizedBox(height: 10),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     // Handle Logout action
-                  //   },
-                  //   child: Text('Logout'),
-                  //   // style: ElevatedButton.styleFrom(
-                  //   // minimumSize: Size(50, 50), // Make button full width
-                  //   // // primary: Colors.red, // Change button color for logout
-                  //   // ),
-                  // ),
                 ],
               ),
             ),

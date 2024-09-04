@@ -11,10 +11,10 @@ validate(String val, int min, int max, String type) {
     if (val.length < min) {
       return 'password length cant be less than $min';
     }
-    if (!val.contains(RegExp(r"[a-z]|[A-Z]")) ||
-        !val.contains(RegExp(r"[0-9]"))) {
-      return 'password showd contains letters and numbers';
-    }
+    // if (!val.contains(RegExp(r"[a-z]|[A-Z]")) ||
+    //     !val.contains(RegExp(r"[0-9]"))) {
+    //   return 'password showd contains letters and numbers';
+    // }
   }
 
   if (type == 'phone') {

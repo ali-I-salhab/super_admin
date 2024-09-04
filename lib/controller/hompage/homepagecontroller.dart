@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:super_admin/core/class/statusrequest.dart';
 import 'package:super_admin/core/functions/handlingdata.dart';
+import 'package:super_admin/core/services/services.dart';
 import 'package:super_admin/data/datasource/remote/home/homedata.dart';
 import 'package:super_admin/data/datasource/remote/manualreservation/manualreservation.dart';
 import 'package:super_admin/data/model/me.dart';
@@ -15,6 +16,9 @@ import '../../view/Homepage/screens/profile.dart';
 
 class HomePageController extends GetxController {
   bool notificationsEnabled = true;
+  MyServices serv = Get.find();
+
+  // TODO: implement your other methods here
   double volumeLevel = 0.5;
   String selectedLanguage = 'English';
 

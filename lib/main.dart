@@ -11,7 +11,7 @@ import 'package:super_admin/core/binging/initialbindings.dart';
 import 'package:super_admin/core/services/services.dart';
 import 'package:super_admin/routes.dart';
 import 'package:super_admin/sizeconfig.dart';
-import 'package:uni_links/uni_links.dart';
+// import 'package:uni_links/uni_links.dart';
 
 import 'core/localization/changelocale.dart';
 import 'core/localization/translation.dart';
@@ -35,8 +35,8 @@ void main() async {
   services = await openhivebox("services");
   sections = await openhivebox("sections");
   await initialservizes();
-  final FirebaseMessaging msg = FirebaseMessaging.instance;
-  msg.getToken().then((value) => print("token : $value"));
+  // final FirebaseMessaging msg = FirebaseMessaging.instance;
+  // msg.getToken().then((value) => print("token : $value"));
 
   runApp(const MyApp());
 }
@@ -49,37 +49,37 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late StreamSubscription _sub;
-  String? _incomingLink;
+  // late StreamSubscription _sub;
+  // String? _incomingLink;
 
-  @override
-  void initState() {
-    print('object');
-    _sub = linkStream.listen((String? link) {
-      if (link != null) {
-        print('linkkkkkkkkkkkkkkkkkkkk');
+  // @override
+  // void initState() {
+  //   print('object');
+  //   _sub = linkStream.listen((String? link) {
+  //     if (link != null) {
+  //       print('linkkkkkkkkkkkkkkkkkkkk');
 
-        // Parse the link and navigate to the appropriate page
-        Uri uri = Uri.parse(link);
-        print(uri.pathSegments);
-        if (uri.pathSegments.length == 3 && uri.pathSegments[0] == 'activate') {
-          print("go to activate page");
-          String uid =
-              uri.pathSegments[1]; // Assuming uid is the second segment
-          String token = uri.queryParameters['token'] ??
-              ''; // Assuming token is a query parameter
-          // /activate/:${uid}/:${token}
+  //       // Parse the link and navigate to the appropriate page
+  //       Uri uri = Uri.parse(link);
+  //       print(uri.pathSegments);
+  //       if (uri.pathSegments.length == 3 && uri.pathSegments[0] == 'activate') {
+  //         print("go to activate page");
+  //         String uid =
+  //             uri.pathSegments[1]; // Assuming uid is the second segment
+  //         String token = uri.queryParameters['token'] ??
+  //             ''; // Assuming token is a query parameter
+  //         // /activate/:${uid}/:${token}
 
-          // Get.toNamed('/activate', arguments: {"uid": 'uid', "token": token});
-        }
-      }
-    });
-    super.initState();
-  }
+  //         // Get.toNamed('/activate', arguments: {"uid": 'uid', "token": token});
+  //       }
+  //     }
+  //   });
+  //   super.initState();
+  // }
 
   @override
   void dispose() {
-    _sub.cancel();
+    // _sub.cancel();
     super.dispose();
   }
 

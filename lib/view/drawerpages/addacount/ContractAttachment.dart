@@ -111,7 +111,9 @@ class ContractAttachment extends StatelessWidget {
                   child: Column(
                 children: [
                   ...List.generate(
-                      controller.hotel!.contractAttachment!.length,
+                      controller.hotel!.contractAttachment != null
+                          ? controller.hotel!.contractAttachment!.length
+                          : 0,
                       (index) => UploadedPdfFiles(
                           ondelete: () {
                             showdeletedialogue(() async {

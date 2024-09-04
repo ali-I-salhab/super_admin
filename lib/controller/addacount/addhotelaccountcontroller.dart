@@ -64,7 +64,7 @@ class AddHotelAccountController extends GetxController {
     print('uploading files function');
 
     isloading.value = true;
-    await Future.delayed(Duration(seconds: 5));
+    // await Future.delayed(Duration(seconds: 5));
     for (int i = 0; i < files!.length; i++) {
       print(
           "-----------------------------------------------------------$i-------${files.length}---------------------------");
@@ -179,7 +179,7 @@ class AddHotelAccountController extends GetxController {
     statusrequest = Statusrequest.loading;
 
     update();
-    await Future.delayed(Duration(seconds: 3));
+    // await Future.delayed(Duration(seconds: 3));
 
     var data = hotel!.toJsonwithoutfiles();
     print(data);
@@ -191,6 +191,7 @@ class AddHotelAccountController extends GetxController {
 
     if (statusrequest == Statusrequest.success) {
       if (response['status'] == 'success') {
+        print("------------------------------succses add hotel");
         AddAccountController addcontroller = Get.find();
         HotelModel updated_hotel = HotelModel.fromJson(response['data']);
         addcontroller.hotels.forEach((element) {
@@ -203,6 +204,7 @@ class AddHotelAccountController extends GetxController {
                 "Successfully", "${updated_hotel.nameen} updated succssfully");
           }
         });
+        Get.offAllNamed(AppRoutes.addaccount);
       } else {
         statusrequest = Statusrequest.failure;
       }
@@ -327,6 +329,7 @@ class AddHotelAccountController extends GetxController {
 
   @override
   void onInit() {
+    print("on init add hotel controller ");
     name = TextEditingController();
     b2c = TextEditingController();
     b2b = TextEditingController();
@@ -358,16 +361,23 @@ class AddHotelAccountController extends GetxController {
 
     accountingphonr = TextEditingController();
     accountingemail = TextEditingController();
+    if (Get.arguments != null) {
+      print("----------------------------------getting arguments");
+      print(Get.arguments);
+      hotel = Get.arguments['hotel'];
+    } else {
+      hotel = HotelModel();
+    }
 
-    hotel = Get.arguments['hotel'];
-    print(hotel!.id.toString());
+    // print(hotel!.id.toString());
     if (hotel != null) {
       name!.text = hotel!.nameen ?? "";
       country!.text = hotel!.country ?? "";
-      availabilityandrateprovider.value = hotel!.availabilityandrateprovider!;
+      availabilityandrateprovider.value =
+          hotel!.availabilityandrateprovider ?? "";
       // activepayment.value=hotel!.pa;
-      username!.text = hotel!.userName!;
-      password!.text = hotel!.password!;
+      username!.text = hotel!.userName ?? "";
+      password!.text = hotel!.password ?? "";
 
       city!.text = hotel!.city ?? "";
       phone!.text = hotel!.phone ?? "";
@@ -376,12 +386,12 @@ class AddHotelAccountController extends GetxController {
 
       email!.text = hotel!.email ?? "";
       phone!.text = hotel!.phone ?? "";
-      reservationemail!.text = hotel!.reservationEmail!;
-      reservationphone!.text = hotel!.reservationPhone!;
-      salesemail!.text = hotel!.salesEmail!;
-      salesphone!.text = hotel!.salesPhone!;
-      accountingemail!.text = hotel!.accountingEmail!;
-      accountingphonr!.text = hotel!.accountingPhone!;
+      reservationemail!.text = hotel!.reservationEmail ?? "";
+      reservationphone!.text = hotel!.reservationPhone ?? "";
+      salesemail!.text = hotel!.salesEmail ?? "";
+      salesphone!.text = hotel!.salesPhone ?? "";
+      accountingemail!.text = hotel!.accountingEmail ?? "";
+      accountingphonr!.text = hotel!.accountingPhone ?? "";
 
       facebook!.text = hotel!.facebook ?? "";
       verticalline!.text = hotel!.lat == null ? "" : hotel!.lat.toString();

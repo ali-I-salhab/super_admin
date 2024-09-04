@@ -48,8 +48,10 @@ class AddAccountData {
     print(ApiApplinks.hotels + '${id}/');
     print("update hotel data is ----------------------_____>");
     print(data);
-    var response =
-        await crud.Sendrequest('PATCH', ApiApplinks.hotels + '${id}/', data);
+
+    var response = id != "null"
+        ? await crud.Sendrequest('PATCH', ApiApplinks.hotels + '${id}/', data)
+        : await crud.Sendrequest('POST', ApiApplinks.hotels, data);
 
     // print(response);
     return response.fold((l) => l, (r) => r);
@@ -88,8 +90,8 @@ class AddAccountData {
         {'phototype': "upload from android app"},
         files,
         'photo');
-
-    // print(response);
+    print("here upload photos functon");
+    print(response);
     return response.fold((l) => l, (r) => r);
   }
 
@@ -107,8 +109,8 @@ class AddAccountData {
   uploadexcelfiles(
     File files,
   ) async {
-    var response = await crud.Sendrequest('PUT',
-        "http://192.168.1.11:8000/booking/transformers/", {}, files, 'file');
+    var response = await crud.Sendrequest(
+        'PUT', ApiApplinks.ulploadexcelfile, {}, files, 'file');
 
     // print(response);
     return response.fold((l) => l, (r) => r);

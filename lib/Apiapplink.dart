@@ -1,20 +1,22 @@
 class ApiApplinks {
   // http://127.0.0.1:8000/booking/manualreservation/1/
-  static const server = 'http://192.168.1.11:8000/booking/';
-  static const serverimage = 'http://192.168.1.11:8000/';
-
-  static const me = serverimage + "auth/users/me/";
-  static const String login = 'http://192.168.1.11:8000/auth/jwt/create/';
-  static const String activate =
-      "http://192.168.1.11:8000/auth/users/activation/";
+  static const server = 'http://ali33salhab.pythonanywhere.com/booking/';
+  static const serverimage = 'http://ali33salhab.pythonanywhere.com/';
+  // static const hotelimages = 'http://ali33salhab.pythonanywhere.com';
+  static const hotelimages =
+      "https://www.pythonanywhere.com/user/ali33salhab/files/home/ali33salhab/deployingbookingapp";
+// https://www.pythonanywhere.com/user/ali33salhab/files/home/ali33salhab/deployingbookingapp/media/hotel/photos/Screenshot_20240903-055614_Facebook_4FeMRtU.png
+  static const me = serverimage + "users/me/";
+  static const String login = serverimage + "auth/jwt/create/";
+  static const String activate = serverimage + "auth/users/activation/";
 
   static const String reset_password =
-      'http://192.168.1.11:8000/auth/users/reset_password/';
+      '$serverimage+auth/users/reset_password/';
 
   static const String reset_password_confirmation =
-      'http://192.168.1.11:8000/auth/users/reset_password_confirm/';
+      '$serverimage+auth/users/reset_password_confirm/';
 
-  static const String signup = 'http://192.168.1.11:8000/auth/users/';
+  static const String signup = serverimage + 'auth/users/';
   static const String hotels = server + 'hotels/';
 
   // "https://alisalhabqq11.000webhostapp.com/";
@@ -33,6 +35,7 @@ class ApiApplinks {
   static const String getroomphoto =
       server + "customer/Home/getroomsimages.php";
   static const String test = server + "manualreservation/";
+  static const String ulploadexcelfile = server + "transformers/";
 }
 // addhotel/hotelphotosview.php
 // https://alisalhabqq11.000webhostapp.com/auth/login.php

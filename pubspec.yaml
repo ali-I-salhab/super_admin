@@ -87,9 +87,10 @@ dependencies:
   pretty_dio_logger:
   internet_connection_checker: ^1.0.0+1
   error_handler: ^1.1.0
-  uni_links: ^0.5.1
+  # uni_links: ^0.5.1
   go_router: ^13.2.0
   animated_rating_stars: ^1.0.1
+  country_state_city: ^0.1.6
 
   # cupertino_icons: ^1.0.2
 

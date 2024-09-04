@@ -62,6 +62,15 @@ class AccountApproval extends StatelessWidget {
               Clicable(
                 ontap: () async {
                   controller.save_account_approval();
+                  print('uploading files function');
+                  Get.defaultDialog(
+                      barrierDismissible: false,
+                      title: "processing",
+                      content: Container(
+                        width: 20.sp,
+                        height: 20.sp,
+                        child: CircularProgressIndicator(),
+                      ));
                   await controller
                       .updatehoteldata(controller.hotel!.id.toString());
                 },
