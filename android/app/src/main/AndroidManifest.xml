@@ -47,7 +47,7 @@
     <category android:name="android.intent.category.DEFAULT" />
     <category android:name="android.intent.category.BROWSABLE" />
      <data android:scheme="http" />
-  <data android:host="192.168.1.11" />
+  <data android:host="http://ali33salhab.pythonanywhere.com" />
   <data android:pathPrefix="/activate/" />  
     <data android:pathPrefix="/password/reset/confirm/" />  
 

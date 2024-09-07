@@ -19,7 +19,7 @@ class Crud {
     MyServices serv = Get.find();
     String accesstoken = serv.shared.getString("accesstoken")!;
     print(JwtDecoder.isExpired(accesstoken));
-
+    print(url);
     var uri = Uri.parse(url);
     var request = http.MultipartRequest(requesttype, uri);
     request.headers.addAll({
