@@ -15,7 +15,7 @@ import 'package:super_admin/data/model/hotelmodel.dart';
 class AddAccountController extends GetxController {
   List<HotelModel> hotels = [];
   Country? selectedcountry;
-  RxString countreyfilter = "".obs;
+  var countreyfilter = [].obs;
   RxString cityfilter = "".obs;
   List<a.State>? states;
 

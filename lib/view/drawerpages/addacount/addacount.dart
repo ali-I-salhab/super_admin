@@ -19,6 +19,7 @@ import 'package:super_admin/view/appIcons.dart';
 import 'package:super_admin/view/drawerpages/addacount/widgets/addedHotelcard.dart';
 import 'package:super_admin/view/drawerpages/addacount/widgets/customAppbar.dart';
 import 'package:super_admin/view/drawerpages/addacount/widgets/custom_clips.dart';
+import 'package:super_admin/view/drawerpages/addacount/widgets/custom_country_dialogue.dart';
 import 'package:super_admin/view/drawerpages/addacount/widgets/custom_slide_switcher.dart';
 import 'package:super_admin/view/drawerpages/amenties/functions/dialogus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -49,24 +50,20 @@ class AddAccount extends StatelessWidget {
                     context: context,
                     useRootNavigator: false,
                     builder: (context) => StatefulBuilder(
-                      builder: (ctx, setState) => CountryPickerDialog(
+                      builder: (ctx, setState) => CustomCountryDilogue(
                         languageCode: "EN",
-                        style: null,
+                        // style: PickerDialogStyle(),
                         filteredCountries: countries,
                         searchText: "serach",
                         countryList: countries!,
-                        selectedCountry: countries[0],
-                        onCountryChanged: (Country country) async {
-                          // controller!.country!.text = country.name;
-                          // print(country.code);
 
-                          // states.forEach((element) {
-                          //   print(element.name);
-                          // });
-                          controller.countreyfilter.value = country.name;
-                          controller.states = await getStatesOfCountry(
-                              country.code); // Afghanistan
+                        onCountryChanged: (List<Country> country) async {
+                          controller.countreyfilter
+                              .addAll(country.map((e) => e.name));
+                          // controller.states = await getStatesOfCountry(
+                          //     country.code);
                         },
+                        selectedCountry: [],
                       ),
                     ),
                   );
@@ -74,11 +71,26 @@ class AddAccount extends StatelessWidget {
                 child: Row(
                   children: [
                     Iconify(AppIcons.equaltor),
-                    Container(
-                      width: 15.w,
-                      child: Text(
-                        ' Country',
-                        style: TextStyle(color: Colors.white),
+                    Obx(
+                      () => UnconstrainedBox(
+                        child: Container(
+                          width: 15.w,
+                          height: 40.sp,
+                          child: FittedBox(
+                            fit: BoxFit.contain,
+                            child: Column(
+                              children: [
+                                ...controller.countreyfilter
+                                    .map((element) => Text(
+                                          element,
+                                          style: TextStyle(color: Colors.white),
+                                        ))
+                                    .toList(),
+                              ],
+                              // style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -239,49 +251,6 @@ class AddAccount extends StatelessWidget {
                 ),
               ),
             ),
-            Obx(() => Container(
-                  padding: EdgeInsets.all(4.sp),
-                  margin: EdgeInsets.symmetric(horizontal: 4.sp),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.main),
-                      borderRadius: BorderRadius.circular(12.sp)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                          child: Text(
-                        "filtered by :",
-                        style: AppTextStyle.main,
-                      )),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.all(2.sp),
-                          padding: EdgeInsets.all(12.sp),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.main),
-                              borderRadius: BorderRadius.circular(4.sp)),
-                          child: Text(
-                            controller.countreyfilter.value,
-                            style: AppTextStyle.main,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(left: 2.sp),
-                          padding: EdgeInsets.all(3.sp),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.main),
-                              borderRadius: BorderRadius.circular(4.sp)),
-                          child: Text(
-                            controller.cityfilter.value + '',
-                            style: AppTextStyle.main,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                )),
             Expanded(
               // height: 65.h,
               // padding: EdgeInsets.symmetric(horizontal: 4.sp),
