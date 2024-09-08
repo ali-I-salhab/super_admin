@@ -53,11 +53,14 @@ class AddAccount extends StatelessWidget {
                         countryList: countries!,
 
                         onCountryChanged: (List<Country> country) async {
+                          // controller.countreyfilter.addAll();
+
                           controller.countreyfilter.addAll([]);
 
                           // controller.states = await getStatesOfCountry(
                           //     country.code);
                         },
+                        selectedCountry: [],
                         selectedCountry: [],
                       ),
                     ),
@@ -77,6 +80,7 @@ class AddAccount extends StatelessWidget {
                               children: [
                                 ...controller.countreyfilter
                                     .map((element) => Text(
+                                          element.name,
                                           element.name,
                                           style: TextStyle(color: Colors.white),
                                         ))
