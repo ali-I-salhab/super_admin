@@ -45,26 +45,13 @@ class AddAccount extends StatelessWidget {
                     context: context,
                     useRootNavigator: false,
                     builder: (context) => StatefulBuilder(
-                      builder: (ctx, setState) => CountryPickerDialog(
+                      builder: (ctx, setState) => CustomCountryDilogue(
                         languageCode: "EN",
-                        style: null,
+                        // style: PickerDialogStyle(),
                         filteredCountries: countries,
                         searchText: "serach",
                         countryList: countries!,
-                        selectedCountry: countries[0],
-                        onCountryChanged: (Country country) async {
-                          // controller!.country!.text = country.name;
-                          // print(country.code);
 
-<<<<<<< Updated upstream
-                          // states.forEach((element) {
-                          //   print(element.name);
-                          // });
-                          controller.countreyfilter.value = country.name;
-                          controller.states = await getStatesOfCountry(
-                              country.code); // Afghanistan
-                        },
-=======
                         onCountryChanged: (List<Country> country) async {
                           controller.countreyfilter.addAll([]);
 
@@ -72,7 +59,6 @@ class AddAccount extends StatelessWidget {
                           //     country.code);
                         },
                         selectedCountry: [],
->>>>>>> Stashed changes
                       ),
                     ),
                   );
@@ -80,13 +66,6 @@ class AddAccount extends StatelessWidget {
                 child: Row(
                   children: [
                     Iconify(AppIcons.equaltor),
-<<<<<<< Updated upstream
-                    Container(
-                      width: 15.w,
-                      child: Text(
-                        ' Country',
-                        style: TextStyle(color: Colors.white),
-=======
                     Obx(
                       () => UnconstrainedBox(
                         child: Container(
@@ -107,7 +86,6 @@ class AddAccount extends StatelessWidget {
                             ),
                           ),
                         ),
->>>>>>> Stashed changes
                       ),
                     ),
                   ],
@@ -192,7 +170,6 @@ class AddAccount extends StatelessWidget {
                       controller.uplodedexcelfile = await uploadexcelfile();
                       if (controller.uplodedexcelfile != null) {
                         print(controller.uplodedexcelfile!.path);
-                        print(p.extension(controller.uplodedexcelfile!.path));
                         if (p.extension(controller.uplodedexcelfile!.path) !=
                             ".xlsx") {
                           Get.snackbar('Error', 'File is not excel type',
@@ -268,49 +245,6 @@ class AddAccount extends StatelessWidget {
                 ),
               ),
             ),
-            Obx(() => Container(
-                  padding: EdgeInsets.all(4.sp),
-                  margin: EdgeInsets.symmetric(horizontal: 4.sp),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.main),
-                      borderRadius: BorderRadius.circular(12.sp)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                          child: Text(
-                        "filtered by :",
-                        style: AppTextStyle.main,
-                      )),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.all(2.sp),
-                          padding: EdgeInsets.all(12.sp),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.main),
-                              borderRadius: BorderRadius.circular(4.sp)),
-                          child: Text(
-                            controller.countreyfilter.value,
-                            style: AppTextStyle.main,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(left: 2.sp),
-                          padding: EdgeInsets.all(3.sp),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.main),
-                              borderRadius: BorderRadius.circular(4.sp)),
-                          child: Text(
-                            controller.cityfilter.value + '',
-                            style: AppTextStyle.main,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                )),
             Expanded(
               // height: 65.h,
               // padding: EdgeInsets.symmetric(horizontal: 4.sp),
