@@ -1,15 +1,11 @@
-import 'package:country_state_city/utils/state_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:intl_phone_field/countries.dart';
-import 'package:intl_phone_field/country_picker_dialog.dart';
-import 'package:path/path.dart' as p;
 
 import 'package:sizer/sizer.dart';
 import 'package:super_admin/controller/addacount/addaccontcontroller.dart';
 import 'package:super_admin/core/class/handlingdataview.dart';
-import 'package:super_admin/core/constants/apptextstyle.dart';
 import 'package:super_admin/core/constants/colors.dart';
 import 'package:super_admin/core/constants/imageassets.dart';
 import 'package:super_admin/core/constants/route.dart';
@@ -60,6 +56,7 @@ class AddAccount extends StatelessWidget {
                           // controller!.country!.text = country.name;
                           // print(country.code);
 
+<<<<<<< Updated upstream
                           // states.forEach((element) {
                           //   print(element.name);
                           // });
@@ -67,6 +64,15 @@ class AddAccount extends StatelessWidget {
                           controller.states = await getStatesOfCountry(
                               country.code); // Afghanistan
                         },
+=======
+                        onCountryChanged: (List<Country> country) async {
+                          controller.countreyfilter.addAll([]);
+
+                          // controller.states = await getStatesOfCountry(
+                          //     country.code);
+                        },
+                        selectedCountry: [],
+>>>>>>> Stashed changes
                       ),
                     ),
                   );
@@ -74,11 +80,34 @@ class AddAccount extends StatelessWidget {
                 child: Row(
                   children: [
                     Iconify(AppIcons.equaltor),
+<<<<<<< Updated upstream
                     Container(
                       width: 15.w,
                       child: Text(
                         ' Country',
                         style: TextStyle(color: Colors.white),
+=======
+                    Obx(
+                      () => UnconstrainedBox(
+                        child: Container(
+                          width: 15.w,
+                          height: 40.sp,
+                          child: FittedBox(
+                            fit: BoxFit.contain,
+                            child: Column(
+                              children: [
+                                ...controller.countreyfilter
+                                    .map((element) => Text(
+                                          element.name,
+                                          style: TextStyle(color: Colors.white),
+                                        ))
+                                    .toList(),
+                              ],
+                              // style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+>>>>>>> Stashed changes
                       ),
                     ),
                   ],
