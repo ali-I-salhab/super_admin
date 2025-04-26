@@ -41,30 +41,7 @@ class AddAccount extends StatelessWidget {
             children: [
               Clicable(
                 ontap: () {
-                  showDialog(
-                    context: context,
-                    useRootNavigator: false,
-                    builder: (context) => StatefulBuilder(
-                      builder: (ctx, setState) => CustomCountryDilogue(
-                        languageCode: "EN",
-                        // style: PickerDialogStyle(),
-                        filteredCountries: countries,
-                        searchText: "serach",
-                        countryList: countries!,
-
-                        onCountryChanged: (List<Country> country) async {
-                          // controller.countreyfilter.addAll();
-
-                          controller.countreyfilter.addAll([]);
-
-                          // controller.states = await getStatesOfCountry(
-                          //     country.code);
-                        },
-                        selectedCountry: [],
-                        selectedCountry: [],
-                      ),
-                    ),
-                  );
+            
                 },
                 child: Row(
                   children: [
